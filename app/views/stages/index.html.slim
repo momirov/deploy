@@ -1,0 +1,25 @@
+h1 Deploy stages for #{@project.title}
+
+table.table.table-bordered
+  tr
+    th Title
+    th Deploy cmd
+    th Current version cmd
+    th Next version cmd
+    th
+    th
+    th
+
+  - @stages.each do |stage|
+    tr
+      td = stage.title
+      td = stage.deploy_cmd
+      td = stage.current_version_cmd
+      td = stage.next_version_cmd
+      td = link_to 'Show', project_stage_path(stage.project, stage)
+      td = link_to 'Edit', edit_project_stage_path(stage.project, stage)
+      td = link_to 'Destroy', [stage.project, stage], :confirm => 'Are you sure?', :method => :delete
+
+br
+
+= link_to 'New Stage', new_project_stage_path(@project)

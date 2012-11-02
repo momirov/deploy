@@ -1,0 +1,28 @@
+div.page-header
+  h2  Deploy #{@project.title}
+
+div.row-fluid
+  ul.revisions
+    li Current versions
+    - for stage in @project.stages
+      li #{stage.title}: #{stage.get_current_version}
+
+div.row-fluid
+  div.span3
+    - @project.stages.each do |stage|
+      div.arrow_box
+        h3
+          | Deploy 
+          a href="http://gerrit.saturized.com/gitweb?p=shippingeasy.git;a=commitdiff;hp=#{stage.get_current_version};h=#{stage.get_next_version};ds=sidebyside" #{stage.get_next_version}
+          | to #{stage.title}
+        = link_to 'Deploy', run_project_stage_path(stage.project, stage), :class =>'btn-large btn-success'
+
+
+  div.span9
+    table
+      - @project.deployments.order("created_at DESC").each do |deploy|
+        = render deploy
+  
+= link_to 'Back', projects_path
+
+= subscribe_to "/deployments/new"

@@ -1,0 +1,22 @@
+p#notice = notice
+
+p
+  strong Stage:
+  = @deployment.stage.title
+p
+  strong Project:
+  = @deployment.project.title
+p
+  strong User:
+  = @deployment.user
+p
+  strong Log:
+  pre.pre-scrollable = @deployment.html_log.html_safe
+p
+  strong Status:
+  = @deployment.status
+p
+  strong Run time:
+  = @deployment.run_time
+
+= link_to 'Back', @deployment.project

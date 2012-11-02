@@ -1,0 +1,21 @@
+p#notice = notice
+
+p
+  strong Project:
+  = @stage.project
+p
+  strong Title:
+  = @stage.title
+p
+  strong Deploy cmd:
+  = @stage.deploy_cmd
+p
+  strong Current version cmd:
+  = @stage.current_version_cmd
+p
+  strong Next version cmd:
+  = @stage.next_version_cmd
+
+= link_to 'Edit', edit_stage_path(@stage)
+'|
+= link_to 'Back', stages_path

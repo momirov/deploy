@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  stage: 
+  project: 
+  user: MyString
+  log: MyText
+  success: false
+  run_time: 1
+
+two:
+  stage: 
+  project: 
+  user: MyString
+  log: MyText
+  success: false
+  run_time: 1

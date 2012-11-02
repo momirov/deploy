@@ -1,0 +1,27 @@
+= form_for @deployment do |f|
+  - if @deployment.errors.any?
+    #error_explanation
+      h2 = "#{pluralize(@deployment.errors.count, "error")} prohibited this deployment from being saved:"
+      ul
+        - @deployment.errors.full_messages.each do |message|
+          li = message
+
+  .field
+    = f.label :stage
+    = f.text_field :stage
+  .field
+    = f.label :project
+    = f.text_field :project
+  .field
+    = f.label :user
+    = f.text_field :user
+  .field
+    = f.label :log
+    = f.text_area :log
+  .field
+    = f.label :success
+    = f.check_box :success
+  .field
+    = f.label :run_time
+    = f.number_field :run_time
+  .actions = f.submit 'Save'

@@ -1,0 +1,28 @@
+doctype html
+html
+  head
+    title New Fast Automatic F-REEK
+    = javascript_include_tag "application"
+    = stylesheet_link_tag    "application", :media => "all"
+    meta name="viewport" content="width=device-width, initial-scale=1.0"
+    = csrf_meta_tags
+  body
+    div.navbar.navbar-inverse.navbar-fixed-top
+      div.navbar-inner
+        .container-fluid
+          = link_to 'New Fast Automatic F-REEK', root_path, :class => 'brand'
+          .nav-collapse.collapse.navbar-responsive-collapse
+            =render_navigation(:level => 1)
+            - if user_signed_in?
+              ul.nav.pull-right
+                li Logged in as #{current_user.login}
+
+    .container-fluid
+      - if flash[:notice]
+        div.alert
+          == flash[:notice]
+
+      - if flash[:error]
+        div.alert.alert-error
+          == flash[:error]
+      == yield

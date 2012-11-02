@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  project: 
+  title: MyString
+  deploy_cmd: MyString
+  current_version_cmd: MyString
+  next_version_cmd: MyString
+
+two:
+  project: 
+  title: MyString
+  deploy_cmd: MyString
+  current_version_cmd: MyString
+  next_version_cmd: MyString

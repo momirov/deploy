@@ -1,0 +1,93 @@
+@import url(http://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic);
+
+// import original bootstrap
+@import "twitter/bootstrap";
+@import "twitter/bootstrap-responsive";
+
+body {
+  font-family: 'Lato', sans-serif;
+  padding-top: 60px;
+}
+
+input, textarea {
+  font-family: 'Lato', sans-serif;
+}
+
+p, ol, ul, td {
+  font-family: 'Lato', sans-serif;
+}
+
+#content {
+  margin-top:30px;
+}
+
+table {
+  width: 100%;
+}
+
+td.actions a {
+  margin-right:10px;
+}
+
+.ansible_black    { color: black; }
+.ansible_green    { color: limegreen; }
+.ansible_yellow   { color: yellow;}
+.ansible_magenta  { color: magenta; }
+.ansible_cyan     { color: cyan; }
+.ansible_white    { color: white; }
+.ansible_gray     { color: dimgray; }
+.ansible_none     { color: none; }
+.ansible_31       { color: #d70000}
+.ansible_32       { color: #859900}
+.ansible_33       { color: #b58900}
+.ansible_34       { color: #268bd2}
+
+.arrow_box {
+  position: relative;
+  background: #F2F2F2;
+  border: 1px solid #E6E6E6;
+  margin-bottom: 35px;
+  padding:10px 15px 25px;
+}
+.arrow_box:after, .arrow_box:before {
+  top: 100%;
+  border: solid transparent;
+  content: " ";
+  height: 0;
+  width: 0;
+  position: absolute;
+  pointer-events: none;
+}
+
+.arrow_box:not(:last-child):after {
+  border-color: rgba(213, 213, 213, 0);
+  border-top-color: #F2F2F2;
+  border-width: 30px;
+  left: 50%;
+  margin-left: -30px;
+}
+.arrow_box:not(:last-child):before {
+  border-color: rgba(233, 245, 157, 0);
+  border-top-color: #E6E6E6;
+  border-width: 31px;
+  left: 50%;
+  margin-left: -31px;
+}
+
+.deployment-items li {
+  display: inline-block;
+  margin-right: 20px;
+  width: 100px;
+}
+
+.revisions {
+  margin: 0 0 10px 0;
+  li {
+    display: inline-block;
+    width:150px;
+  }
+}
+
+.center {
+  text-align: center;
+}
