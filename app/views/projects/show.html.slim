@@ -3,9 +3,10 @@ div.page-header
 
 div.row-fluid
   ul.revisions
-    li Current versions
-    - for stage in @project.stages
-      li #{stage.title}: #{stage.get_current_version}
+    li
+      strong Current versions
+      - for stage in @project.stages
+        li #{stage.title}: #{stage.get_current_version}
 
 div.row-fluid
   div.span3
