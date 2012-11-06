@@ -1,3 +1,5 @@
+require 'fileutils'
+
 class Project < ActiveRecord::Base
   attr_accessible :title, :repo
   has_many :stages
@@ -16,13 +18,13 @@ class Project < ActiveRecord::Base
   def get_dir
     # create dir
     if !File.directory? get_dir_path
-      Dir.mkdir(get_dir_path, 0700)
+      FileUtils.mkdir_p get_dir_path
     end
 
     Dir.new(get_dir_path)
   end
 
   def get_dir_path
-    Rails.root.join('projects', id.to_s)
+    Rails.root.join('..', 'deploy_projects', id.to_s)
   end
 end
