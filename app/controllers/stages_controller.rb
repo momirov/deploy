@@ -6,7 +6,7 @@ class StagesController < ApplicationController
 
     respond_to do |format|
       format.html # index.html.erb
-      format.json { render json: @projects.stages }
+      format.json { render json: @project.stages }
     end
   end
 
