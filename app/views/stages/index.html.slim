@@ -10,7 +10,7 @@ table.table.table-bordered
     th
     th
 
-  - @stages.each do |stage|
+  - @project.stages.each do |stage|
     tr
       td = stage.title
       td = stage.deploy_cmd

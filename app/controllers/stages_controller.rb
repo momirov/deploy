@@ -3,11 +3,10 @@ class StagesController < ApplicationController
   # GET /stages.json
   def index
     @project = Project.find(params[:project_id])
-    @stages = Stage.all
 
     respond_to do |format|
       format.html # index.html.erb
-      format.json { render json: @stages }
+      format.json { render json: @projects.stages }
     end
   end
 
