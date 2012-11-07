@@ -25,6 +25,6 @@ class Project < ActiveRecord::Base
   end
 
   def get_dir_path
-    Rails.root.join('..', 'deploy_projects', id.to_s)
+    Deploy::Application.config.project_checkout_path.join(id.to_s)
   end
 end

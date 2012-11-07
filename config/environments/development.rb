@@ -34,4 +34,6 @@ Deploy::Application.configure do
 
   # Expands the lines which load the assets
   config.assets.debug = true
+
+  config.project_checkout_path = Rails.root.join('..', 'deploy_projects')
 end
