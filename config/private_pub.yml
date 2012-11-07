@@ -7,4 +7,3 @@ test:
 production:
   server: "http://deploy:9292/faye"
   secret_token: "8d91d3ec69ce0b54e60dbb8d32c546ccd79c8653f76c854afc2159c60a5f4fbe"
-  signature_expiration: 3600 # one hour
