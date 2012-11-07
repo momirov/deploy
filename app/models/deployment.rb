@@ -33,6 +33,8 @@ class Deployment < ActiveRecord::Base
     end
     save
     PrivatePub.publish_to("/deployments/new", deployment: self)
+    # delete version cache
+    Rails.cache.delete("stage_revision_#{self.stage.id}"
     terminate
   end
 

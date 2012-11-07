@@ -5,7 +5,7 @@ class Stage < ActiveRecord::Base
   attr_accessible :current_version_cmd, :deploy_cmd, :next_version_cmd, :title
 
   def get_current_version
-    revision = Rails.cache.fetch("stage_revision_#{self.id}", :expires_in => 10.minutes) do
+    revision = Rails.cache.fetch("stage_revision_#{self.id}", :expires_in => 24.hours) do
       %x{#{current_version_cmd}}
     end
 
