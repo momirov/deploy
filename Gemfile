@@ -49,3 +49,5 @@ gem 'celluloid'
 gem 'private_pub'
 
 gem 'acts_as_list'
+
+gem 'pg'
