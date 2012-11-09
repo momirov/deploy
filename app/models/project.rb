@@ -2,7 +2,7 @@ require 'fileutils'
 
 class Project < ActiveRecord::Base
   attr_accessible :title, :repo
-  has_many :stages
+  has_many :stages, :order => "position"
   has_many :deployments, :through => :stages
 
   def pull

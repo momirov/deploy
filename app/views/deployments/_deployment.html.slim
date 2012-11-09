@@ -4,8 +4,8 @@
   td = deployment.project.title
   td = deployment.stage.title
   td = deployment.user
-  td = deployment.old_revision
-  td = deployment.new_revision
+  td 
+    #{deployment.old_revision} -> #{deployment.new_revision}
   td = deployment.created_at.to_s(:long)
   td = deployment.run_time
   td = link_to 'show', deployment, :class => 'btn btn-success'

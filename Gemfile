@@ -47,8 +47,5 @@ gem "simple-navigation"
 gem 'celluloid'
 
 gem 'private_pub'
-gem 'thin'
 
-gem 'foreman'
-
-gem 'pg'
+gem 'acts_as_list'
