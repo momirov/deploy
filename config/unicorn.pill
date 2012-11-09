@@ -60,6 +60,6 @@ Bluepill.application("deployment", :log_file => rails_root+"/log/bluepill.log") 
         process.working_dir = "#{rails_root}"
         process.pid_file = File.join(rails_root, 'tmp', 'pids', 'faye.pid')
         process.daemonize = true
-        process.stdout = process.stderr = File.join(BASE_DIR,"log/faye.log")
+        process.stdout = process.stderr = File.join(rails_root,"log/faye.log")
     end
 end
