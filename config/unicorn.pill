@@ -54,4 +54,12 @@ Bluepill.application("deployment", :log_file => rails_root+"/log/bluepill.log") 
             child_process.stop_command = "kill -QUIT {{PID}}"
         end
     end
+
+    app.process("faye") do |process|
+        process.start_command = "rackup private_pub.ru -s thin -E production"
+        process.working_dir = "#{rails_root}"
+        process.pid_file = File.join(rails_root, 'tmp', 'pids', 'faye.pid')
+        process.daemonize = true
+        process.stdout = process.stderr = File.join(BASE_DIR,"log/faye.log")
+    end
 end

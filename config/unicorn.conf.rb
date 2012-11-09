@@ -6,7 +6,7 @@
 # See also http://unicorn.bogomips.org/examples/unicorn.conf.rb for
 # a more verbose configuration using more features.
 
-listen "tmp/pids/unicorn.sock"
+listen "/home/shippingeasy/deployment/current/tmp/pids/unicorn.sock", :backlog => 1024
 worker_processes 2 # this should be >= nr_cpus
 pid_path = "tmp/pids/unicorn.pid"
 timeout 30
