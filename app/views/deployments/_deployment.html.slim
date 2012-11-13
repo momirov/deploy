@@ -8,4 +8,7 @@
     #{deployment.old_revision} -> #{deployment.new_revision}
   td = deployment.created_at.to_s(:long)
   td = deployment.run_time
-  td = link_to 'show', deployment, :class => 'btn btn-success'
+  td
+    = link_to 'show', deployment, :class => 'btn btn-success'
+    - if deployment.status == 'running'
+      = link_to 'cancel', deployment_kill_path(deployment), :class => 'btn btn-danger'

@@ -1,5 +1,7 @@
 Deploy::Application.routes.draw do
-  resources :deployments
+  resources :deployments do
+    get 'kill'
+  end
 
   resources :projects do
     resources :stages do

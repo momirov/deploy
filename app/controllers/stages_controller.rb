@@ -36,7 +36,9 @@ class StagesController < ApplicationController
       @deployment.old_revision = @stage.get_current_version
       @deployment.save
 
-      @deployment.async.deploy
+      @runner = Runner.new @deployment
+      Celluloid::Actor["deployment_#{@deployment.id}"] = @runner
+      @runner.async.deploy!
 
       notice = 'New deployment started'
     end

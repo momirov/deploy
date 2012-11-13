@@ -21,6 +21,23 @@ class DeploymentsController < ApplicationController
     end
   end
 
+  # GET /deployments/1
+  # GET /deployments/1.json
+  def kill
+    @deployment = Deployment.find(params[:deployment_id])
+    begin
+      Celluloid::Actor.kill Celluloid::Actor["deployment_#{@deployment.id}"] if Celluloid::Actor["deployment_#{@deployment.id}"]
+    rescue Celluloid::DeadActorError
+
+    end
+    @deployment.status = :canceled
+    @deployment.save
+    respond_to do |format|
+      format.html { redirect_to @deployment.project, notice: 'Deployment was successfully canceled.' }
+      format.json { render json: @deployment }
+    end
+  end
+
   # GET /deployments/new
   # GET /deployments/new.json
   def new
