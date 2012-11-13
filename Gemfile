@@ -31,23 +31,15 @@ gem 'devise_ldap_authenticatable'
 
 # Template
 gem 'slim-rails'
-
 # execute shell scripts
 gem 'open4'
-
 gem 'classy_enum'
-
 gem 'capistrano'
 gem 'capistrano_colors'
-
 gem 'ansible'
-
 gem "simple-navigation"
-
 gem 'celluloid'
-
 gem 'private_pub'
-
 gem 'acts_as_list'
-
 gem 'pg'
+gem 'thin'
