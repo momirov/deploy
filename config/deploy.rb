@@ -9,7 +9,7 @@ set :default_environment, {
   "PATH" => "/home/#{user}/.rbenv/shims:/home/#{user}/.rbenv/bin:$PATH",
 }
 
-# Or: `accurev`, `bzr`, `cvs`, `darcs`, `git`, `mercurial`, `perforce`, `subversion` or `none`
+set :unicorn_pid, "#{current_path}/tmp/pids/unicorn.pid"
 
 role :web, "deploy"                          # Your HTTP server, Apache/etc
 role :app, "deploy"                          # This may be the same as your `Web` server
@@ -26,7 +26,7 @@ namespace :deploy do
   task :start do ; end
   task :stop do ; end
   task :restart, :roles => :app, :except => { :no_release => true } do
-    run "#{try_sudo} touch #{File.join(current_path,'tmp','restart.txt')}"
+    run "#{try_sudo} kill -s USR2 `cat #{unicorn_pid}`"
   end
 end
 
