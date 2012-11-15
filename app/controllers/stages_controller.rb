@@ -34,6 +34,7 @@ class StagesController < ApplicationController
       @deployment.status = :running
       @deployment.new_revision = @stage.get_next_version
       @deployment.old_revision = @stage.get_current_version
+      @deployment.log = ''
       @deployment.save
 
       @runner = Runner.new @deployment
@@ -44,7 +45,7 @@ class StagesController < ApplicationController
     end
 
     respond_to do |format|
-      format.html { redirect_to project_path(@stage.project), notice: notice }
+      format.html { redirect_to @deployment, notice: notice }
       format.json { render json: @stage }
     end
   end

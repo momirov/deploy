@@ -1,15 +1,12 @@
-require 'ansible'
-
 class Deployment < ActiveRecord::Base
-  include Ansible
-
   belongs_to :stage
   belongs_to :project
   attr_accessible :stage_id, :project_id, :log, :run_time, :status, :user
+  after_save :publish
 
   classy_enum_attr :status
 
-  def html_log
-    ansi_escaped(self.log)
+  def publish
+    PrivatePub.publish_to("/deployments/new", deployment: self)
   end
 end

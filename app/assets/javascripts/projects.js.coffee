@@ -1,7 +1,15 @@
 # Place all the behaviors and hooks related to the matching controller here.
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
+
+colorTheLog = (data) ->
+  parser = new ansi();
+  $('#deployment-log').html(parser.toHtml(data));
+
 $ ->
+  if $('#deployment-log').length > 0
+    colorTheLog($('#deployment-log').html())
+
   $(".label-inverse").parent().spin
     lines: 9 # The number of lines to draw
     length: 1 # The length of each line
@@ -20,6 +28,11 @@ $ ->
     left: '-30' # Left position relative to parent in px
 
 PrivatePub.subscribe "/deployments/new", (data, channel) ->
+  if $('#deployment-log').length > 0
+    colorTheLog(data.deployment.log)
+    $('.status').html(data.deployment.status);
+    $("html, body").animate({ scrollTop: $(document).height() }, "fast");
+
   if data.deployment.status == 'completed'
     $("#deployment_#{data.deployment.id} .spinner").remove()
     $("#deployment_#{data.deployment.id} td span").removeClass('label-inverse').addClass('label-success').html('completed')
@@ -30,6 +43,7 @@ PrivatePub.subscribe "/deployments/new", (data, channel) ->
     $("#deployment_#{data.deployment.id} .spinner").remove()
     $("#deployment_#{data.deployment.id} td span").removeClass('label-inverse').addClass('label-important').html('error')
     $("#deployment_#{data.deployment.id} td a.btn-danger").remove()
+  
 
 
   

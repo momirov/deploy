@@ -11,12 +11,14 @@ p
   = @deployment.user
 p
   strong Log:
-  pre.pre-scrollable = @deployment.html_log.html_safe
+  pre#deployment-log = @deployment.log.html_safe
 p
   strong Status:
-  = @deployment.status
+  span.status = @deployment.status
 p
   strong Run time:
   = @deployment.run_time
 
 = link_to 'Back', @deployment.project
+
+= subscribe_to "/deployments/new"

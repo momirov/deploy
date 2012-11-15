@@ -36,7 +36,6 @@ gem 'open4'
 gem 'classy_enum'
 gem 'capistrano'
 gem 'capistrano_colors'
-gem 'ansible'
 gem "simple-navigation"
 gem 'celluloid'
 gem 'private_pub'

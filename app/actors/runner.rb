@@ -1,3 +1,5 @@
+require 'pty'
+
 class Runner
   include Celluloid
   INACTIVITY_TIMEOUT = 300 # wait 5 minutes for inactivity
@@ -8,28 +10,30 @@ class Runner
   end
 
   def deploy
-    @deployment.log = ''
     @deployment.project.pull
-    status =
-        Open4::popen4("cd #{@deployment.project.get_dir_path} && #{@deployment.stage.deploy_cmd}") do |pid, stdin, stdout, stderr|
-          stdout.each do |line|
+    begin
+      PTY.spawn( "cd #{@deployment.project.get_dir_path} && #{@deployment.stage.deploy_cmd}" ) do |stdin, stdout, pid|
+        begin
+          # Do stuff with the output here. Just printing to show it works
+          stdin.each do |line|
             @deployment.log += line
             @deployment.save
           end
-          stderr.each do |line|
-            @deployment.log += line
-            @deployment.save
-          end
-
+        rescue Errno::EIO
         end
-
-    if status.exitstatus.to_i > 0
+        Process.wait(pid)
+      end
+    rescue PTY::ChildExited => e  
+    end  
+    
+    if $?.exitstatus.to_i > 0
       @deployment.status = :error
     else
       @deployment.status = :completed
     end
+
     @deployment.save
-    PrivatePub.publish_to("/deployments/new", deployment: @deployment)
+
     # delete version cache
     Rails.cache.delete("stage_revision_#{@deployment.stage.id}")
     terminate
