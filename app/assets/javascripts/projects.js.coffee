@@ -31,7 +31,7 @@ PrivatePub.subscribe "/deployments/new", (data, channel) ->
   if $('#deployment-log').length > 0
     colorTheLog(data.deployment.log)
     $('.status').html(data.deployment.status);
-    $("html, body").animate({ scrollTop: $(document).height() }, "fast");
+    $("html, body").stop().animate({ scrollTop: $(document).height() }, "fast");
 
   if data.deployment.status == 'completed'
     $("#deployment_#{data.deployment.id} .spinner").remove()
