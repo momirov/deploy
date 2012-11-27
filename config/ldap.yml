@@ -21,7 +21,7 @@ authorizations: &AUTHORIZATIONS
 ## Enviornments
 
 development:
-  host: zeus
+  host: ldap
   port: 389
   attribute: uid
   base: ou=People,ou=saturized,dc=ldap
@@ -41,7 +41,7 @@ test:
   # <<: *AUTHORIZATIONS
 
 production:
-  host: zeus
+  host: ldap
   port: 389
   attribute: uid
   base: ou=People,ou=saturized,dc=ldap

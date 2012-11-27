@@ -16,6 +16,16 @@ stderr_path "log/unicorn-err.log"
 stdout_path "log/unicorn-out.log"
 
 before_fork do |server, worker|
+  # http://codelevy.com/2010/02/09/getting-started-with-unicorn.html
+  old_pid = 'tmp/pids/unicorn.pid.oldbin'
+  if File.exists?(old_pid) && server.pid != old_pid
+    begin
+      Process.kill("QUIT", File.read(old_pid).to_i)
+    rescue Errno::ENOENT, Errno::ESRCH
+      # someone else did our job for us
+    end
+  end
+
   # Replace with MongoDB or whatever
   if defined?(ActiveRecord::Base)
     ActiveRecord::Base.connection.disconnect!
