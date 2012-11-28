@@ -5,7 +5,7 @@
   td = deployment.stage.title
   td = deployment.user
   td 
-    #{deployment.old_revision} -> #{deployment.new_revision}
+    a href="http://gerrit.saturized.com/gitweb?p=shippingeasy.git;a=commitdiff;hp=#{deployment.old_revision};h=#{deployment.new_revision};ds=sidebyside" #{deployment.old_revision} -> #{deployment.new_revision}
   td = deployment.created_at.to_s(:long)
   td = deployment.run_time
   td
