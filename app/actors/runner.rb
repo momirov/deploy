@@ -12,7 +12,8 @@ class Runner
   def deploy
     @deployment.project.pull
     begin
-      PTY.spawn( "cd #{@deployment.project.get_dir_path} && #{@deployment.stage.deploy_cmd}" ) do |stdin, stdout, pid|
+      deploy_command = @deployment.stage.deploy_cmd.gsub("{user_name}", @deployment.user)
+      PTY.spawn( "cd #{@deployment.project.get_dir_path} && #{deploy_command}" ) do |stdin, stdout, pid|
         begin
           # Do stuff with the output here. Just printing to show it works
           stdin.each do |line|
