@@ -1,3 +1,6 @@
+# Execute "bundle install" after deploy, but only when really needed
+require "bundler/capistrano"
+
 set :application, "Deployment"
 set :repository,  "ssh://gerrit.saturized.com:29418/deployment"
 set :deploy_to, "/home/shippingeasy/deployment/"
@@ -29,12 +32,6 @@ namespace :deploy do
     run "bluepill restart unicorn --no-privilege"
   end
 end
-
-desc "install the necessary prerequisites"
-task :bundle_install, :roles => :app do
-  run "cd #{release_path} && bundle install"
-end
-after "deploy:update_code", :bundle_install
 
 namespace :deploy do
   namespace :assets do
