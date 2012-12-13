@@ -28,11 +28,11 @@ GEM
     activesupport (3.2.8)
       i18n (~> 0.6)
       multi_json (~> 1.0)
+    acts_as_list (0.1.8)
     addressable (2.3.2)
     anjlab-bootstrap-rails (2.2.1.0)
       railties (>= 3.0)
       sass (>= 3.2)
-    ansible (0.2.0)
     arel (3.0.2)
     bcrypt-ruby (3.0.1)
     builder (3.0.4)
@@ -87,8 +87,9 @@ GEM
       yajl-ruby (>= 1.0.0)
     faye-websocket (0.4.6)
       eventmachine (>= 0.12.0)
-    foreman (0.60.2)
-      thor (>= 0.13.6)
+    gon (4.0.1)
+      actionpack (>= 2.3.0)
+      json
     highline (1.6.15)
     hike (1.2.1)
     http_parser.rb (0.5.3)
@@ -112,8 +113,8 @@ GEM
     net-ssh (2.6.1)
     net-ssh-gateway (1.1.0)
       net-ssh (>= 1.99.1)
-    open4 (1.3.0)
     orm_adapter (0.4.0)
+    pg (0.14.1)
     polyglot (0.3.3)
     private_pub (1.0.3)
       faye
@@ -149,6 +150,8 @@ GEM
       tilt (~> 1.3)
     simple-navigation (3.9.0)
       activesupport (>= 2.3.2)
+    simple-navigation-bootstrap (0.0.4)
+      simple-navigation (>= 3.7.0)
     slim (1.3.3)
       temple (~> 0.5.5)
       tilt (~> 1.3.3)
@@ -187,8 +190,8 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  acts_as_list
   anjlab-bootstrap-rails (>= 2.2)
-  ansible
   capistrano
   capistrano_colors
   celluloid
@@ -196,13 +199,14 @@ DEPENDENCIES
   coffee-rails (~> 3.2.1)
   devise
   devise_ldap_authenticatable
-  foreman
+  gon
   jquery-rails
-  open4
+  pg
   private_pub
   rails (= 3.2.8)
   sass-rails (~> 3.2.3)
   simple-navigation
+  simple-navigation-bootstrap
   slim-rails
   spinjs-rails
   sqlite3
