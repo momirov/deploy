@@ -1,7 +1,7 @@
 p#notice = notice
 
 p
- iframe width="560" height="315" src="http://www.youtube.com/embed/CGvGdOjnTIA?autoplay=1" frameborder="0" allowfullscreen
+ iframe width="560" height="315" src="http://www.youtube.com/embed/#{Rails.configuration.videos.sample}?autoplay=1" frameborder="0" allowfullscreen
 
 p
   strong Stage:
@@ -24,4 +24,4 @@ p
 
 = link_to 'Back', @deployment.project
 
-= subscribe_to "/deployments/new"
+= subscribe_to "/deployments/#{@deployment.id}"

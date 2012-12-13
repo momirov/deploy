@@ -58,5 +58,12 @@ module Deploy
 
     # Version of your assets, change this if you want to expire all your assets
     config.assets.version = '1.0'
+
+    config.videos = [
+        '5Z1mRZN47rg',
+        'CGvGdOjnTIA',
+        '4rvACiBclFI',
+        'blpWlixiI2Q'
+    ]
   end
 end

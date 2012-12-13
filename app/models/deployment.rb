@@ -7,6 +7,10 @@ class Deployment < ActiveRecord::Base
   classy_enum_attr :status
 
   def publish
-    PrivatePub.publish_to("/deployments/new", deployment: self)
+    PrivatePub.publish_to("/deployments/#{self.id}", deployment: self)
+
+    if self.status == :completed
+      PrivatePub.publish_to("/deployments/new", deployment: self)
+    end
   end
 end
