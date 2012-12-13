@@ -25,10 +25,3 @@ p
 = link_to 'Back', @deployment.project
 
 = subscribe_to "/deployments/#{@deployment.id}"
-javascript:
-  PrivatePub.subscribe("/deployments/#{@deployment.id}", function(data, channel) {
-    colorTheLog(data.deployment.log);
-    $('.status').html(data.deployment.status);
-    $("html, body").stop().animate({ scrollTop: $(document).height() }, "fast");
-  });
-  

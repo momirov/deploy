@@ -14,6 +14,7 @@ class DeploymentsController < ApplicationController
   # GET /deployments/1.json
   def show
     @deployment = Deployment.find(params[:id])
+    gon.deployment = @deployment
 
     respond_to do |format|
       format.html # show.html.erb

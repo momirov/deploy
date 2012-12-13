@@ -39,6 +39,9 @@ PrivatePub.subscribe "/deployments/new", (data, channel) ->
     $("#deployment_#{data.deployment.id} td span").removeClass('label-inverse').addClass('label-important').html('error')
     $("#deployment_#{data.deployment.id} td a.btn-danger").remove()
   
-
+PrivatePub.subscribe "/deployments/#{gon.deployment.id}", (data, channel) ->
+  colorTheLog(data.deployment.log)
+  $('.status').html(data.deployment.status)
+  $("html, body").stop().animate({ scrollTop: $(document).height() }, "fast")
 
   
