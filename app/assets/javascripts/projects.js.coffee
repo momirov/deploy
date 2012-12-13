@@ -28,11 +28,6 @@ $ ->
     left: '-30' # Left position relative to parent in px
 
 PrivatePub.subscribe "/deployments/new", (data, channel) ->
-  if $('#deployment-log').length > 0
-    colorTheLog(data.deployment.log)
-    $('.status').html(data.deployment.status);
-    $("html, body").stop().animate({ scrollTop: $(document).height() }, "fast");
-
   if data.deployment.status == 'completed'
     $("#deployment_#{data.deployment.id} .spinner").remove()
     $("#deployment_#{data.deployment.id} td span").removeClass('label-inverse').addClass('label-success').html('completed')
