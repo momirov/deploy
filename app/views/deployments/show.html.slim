@@ -13,11 +13,13 @@ p
   strong User:
   = @deployment.user
 p
-  strong Log:
-  pre#deployment-log = @deployment.log.html_safe
-p
   strong Status:
   span.status = @deployment.status
+  
+p
+  strong Log:
+  pre#deployment-log = @deployment.log.html_safe
+
 p
   strong Run time:
   = @deployment.run_time
