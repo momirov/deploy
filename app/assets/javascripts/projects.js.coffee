@@ -4,7 +4,7 @@
 
 colorTheLog = (data) ->
   parser = new ansi();
-  $('#deployment-log').html(parser.toHtml(data));
+  $('#deployment-log').html(parser.toHtml(data.split("\n").reverse().join("\n")));
 
 $ ->
   if $('#deployment-log').length > 0
@@ -42,6 +42,3 @@ PrivatePub.subscribe "/deployments/new", (data, channel) ->
 PrivatePub.subscribe "/deployments/#{gon.deployment.id}", (data, channel) ->
   colorTheLog(data.deployment.log)
   $('.status').html(data.deployment.status)
-  $("html, body").stop().animate({ scrollTop: $(document).height() }, "fast")
-
-  
