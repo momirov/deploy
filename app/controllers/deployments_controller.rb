@@ -1,3 +1,5 @@
+require 'youtube_it'
+
 class DeploymentsController < ApplicationController
   # GET /deployments
   # GET /deployments.json
@@ -15,6 +17,9 @@ class DeploymentsController < ApplicationController
   def show
     @deployment = Deployment.find(params[:id])
     gon.deployment = @deployment
+
+    client = YouTubeIt::Client.new(:dev_key => Rails.configuration.youtube_dev_key)
+    @video = client.videos_by(:user => 'failarmy', :fields => {:published  => ((Date.today - 30)..(Date.today))}).videos.sample
 
     respond_to do |format|
       format.html # show.html.erb
