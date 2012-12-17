@@ -17,7 +17,7 @@ stdout_path "log/unicorn-out.log"
 
 before_fork do |server, worker|
   # http://codelevy.com/2010/02/09/getting-started-with-unicorn.html
-  old_pid = 'tmp/pids/unicorn.pid.oldbin'
+  old_pid = "#{pid_path}.oldbin"
   if File.exists?(old_pid) && server.pid != old_pid
     begin
       Process.kill("QUIT", File.read(old_pid).to_i)

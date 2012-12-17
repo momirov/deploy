@@ -29,7 +29,7 @@ namespace :deploy do
   task :start do ; end
   task :stop do ; end
   task :restart, :roles => :app, :except => { :no_release => true } do
-    run "bluepill restart unicorn --no-privilege"
+    run "cd #{current_path} && bluepill restart unicorn --no-privilege"
   end
 end
 
