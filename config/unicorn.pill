@@ -22,7 +22,7 @@ Bluepill.application("deployment", :log_file => rails_root+"/log/bluepill.log") 
         # Set Unicorn PID file
         process.pid_file = File.join(rails_root, 'tmp', 'pids', 'unicorn.pid')
         process.working_dir = "#{rails_root}"
-
+        process.cache_actual_pid = false
         # Set the command line argument to START Unicorn.
         process.start_command = "#{unicorn_path} -Dc #{rails_root}/config/unicorn.conf.rb -E #{rails_env}"
 
