@@ -68,6 +68,8 @@ GEM
     devise_ldap_authenticatable (0.6.1)
       devise (>= 2.0.0)
       net-ldap (~> 0.2.2)
+    dotiw (1.1.1)
+      actionpack (~> 3)
     em-http-request (1.0.3)
       addressable (>= 2.2.3)
       cookiejar
@@ -228,6 +230,7 @@ DEPENDENCIES
   coffee-rails (~> 3.2.1)
   devise
   devise_ldap_authenticatable
+  dotiw
   gon
   jquery-rails
   kaminari

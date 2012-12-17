@@ -15,7 +15,6 @@ class Runner
       deploy_command = @deployment.stage.deploy_cmd.gsub("{user_name}", @deployment.user)
       PTY.spawn( "cd #{@deployment.project.get_dir_path} && #{deploy_command}" ) do |stdin, stdout, pid|
         begin
-          # Do stuff with the output here. Just printing to show it works
           stdin.each do |line|
             @deployment.log += line
             @deployment.save
@@ -32,7 +31,8 @@ class Runner
     else
       @deployment.status = :completed
     end
-
+    
+    @deployment.completed_at = Time.now
     @deployment.save
 
     # delete version cache

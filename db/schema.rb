@@ -11,19 +11,19 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121109130211) do
+ActiveRecord::Schema.define(:version => 20121217131644) do
 
   create_table "deployments", :force => true do |t|
     t.integer  "stage_id"
     t.integer  "project_id"
     t.string   "user"
     t.text     "log"
-    t.integer  "run_time"
     t.datetime "created_at",   :null => false
     t.datetime "updated_at",   :null => false
     t.string   "status"
     t.string   "old_revision"
     t.string   "new_revision"
+    t.datetime "completed_at"
   end
 
   add_index "deployments", ["project_id"], :name => "index_deployments_on_project_id"

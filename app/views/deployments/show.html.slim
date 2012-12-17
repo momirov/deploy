@@ -22,7 +22,7 @@ p
 
 p
   strong Run time:
-  = @deployment.run_time
+  = distance_of_time_in_words(@deployment.created_at, @deployment.completed_at, true) if @deployment.completed_at?
 
 = link_to 'Back', @deployment.project
 
