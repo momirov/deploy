@@ -35,6 +35,9 @@ GEM
       sass (>= 3.2)
     arel (3.0.2)
     bcrypt-ruby (3.0.1)
+    bootstrap-kaminari-views (0.0.2)
+      kaminari (>= 0.13)
+      rails (>= 3.1)
     builder (3.0.4)
     capistrano (2.13.4)
       highline
@@ -104,6 +107,9 @@ GEM
     json (1.7.5)
     jwt (0.1.5)
       multi_json (>= 1.0)
+    kaminari (0.14.1)
+      actionpack (>= 3.0.0)
+      activesupport (>= 3.0.0)
     mail (2.4.4)
       i18n (>= 0.4.0)
       mime-types (~> 1.16)
@@ -214,6 +220,7 @@ PLATFORMS
 DEPENDENCIES
   acts_as_list
   anjlab-bootstrap-rails (>= 2.2)
+  bootstrap-kaminari-views
   capistrano
   capistrano_colors
   celluloid
@@ -223,6 +230,7 @@ DEPENDENCIES
   devise_ldap_authenticatable
   gon
   jquery-rails
+  kaminari
   pg
   private_pub
   rails (= 3.2.8)

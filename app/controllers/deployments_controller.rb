@@ -19,7 +19,7 @@ class DeploymentsController < ApplicationController
     gon.deployment = @deployment
 
     client = YouTubeIt::Client.new(:dev_key => Rails.configuration.youtube_dev_key)
-    @video = client.videos_by(:user => 'failarmy', :fields => {:published  => ((Date.today - 30)..(Date.today))}).videos.sample
+    @video = client.videos_by(:query => 'fail', :fields => {:published  => ((Date.today - 30)..(Date.today)), :view_count => "1000000"}).videos.sample
 
     respond_to do |format|
       format.html # show.html.erb
