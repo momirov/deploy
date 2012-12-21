@@ -62,3 +62,5 @@ module Deploy
     config.youtube_dev_key = 'AI39si77jqC2ReufVmM9SZzOPVUp5H6CJMXqpkRJf0oiWZmCfv8ATRVx2B3RAtL0iFKRlHlD3yYd8O2CL_gq8uYpZNtYVoMmsA'
   end
 end
+
+Celluloid.logger = Rails.logger

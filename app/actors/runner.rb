@@ -9,10 +9,10 @@ class Runner
     @timer = after(INACTIVITY_TIMEOUT) { terminate }
   end
 
-  def deploy
+  def deploy(cmd)
     @deployment.project.pull
     begin
-      deploy_command = @deployment.stage.deploy_cmd.gsub("{user_name}", @deployment.user)
+      deploy_command = cmd.gsub("{user_name}", @deployment.user)
       PTY.spawn( "cd #{@deployment.project.get_dir_path} && #{deploy_command}" ) do |stdin, stdout, pid|
         begin
           stdin.each do |line|

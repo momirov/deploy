@@ -4,6 +4,7 @@ table.table.table-bordered
   tr
     th Title
     th Deploy cmd
+    th Rollback cmd
     th Current version cmd
     th Next version cmd
     th
@@ -14,6 +15,7 @@ table.table.table-bordered
     tr
       td = stage.title
       td = stage.deploy_cmd
+      td = stage.rollback_cmd
       td = stage.current_version_cmd
       td = stage.next_version_cmd
       td = link_to 'Show', project_stage_path(stage.project, stage)

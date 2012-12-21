@@ -21,7 +21,7 @@ class StagesController < ApplicationController
     end
   end
 
-  def run
+  def deploy
     @stage = Stage.find(params[:id])
 
     notice = "Deployment for #{@stage.title} is already running, please wait for the previous deployment to finish."
@@ -39,7 +39,36 @@ class StagesController < ApplicationController
 
       @runner = Runner.new @deployment
       Celluloid::Actor["deployment_#{@deployment.id}"] = @runner
-      @runner.async.deploy
+      @runner.async.deploy @stage.deploy_cmd
+      notice = 'New deployment started'
+
+    end
+
+    respond_to do |format|
+      format.html { redirect_to @deployment, notice: notice }
+      format.json { render json: @stage }
+    end
+  end
+
+  def rollback
+    @stage = Stage.find(params[:id])
+
+    notice = "Deployment for #{@stage.title} is already running, please wait for the previous deployment to finish."
+
+    if @stage.deployments.where(:status => :running).count == 0
+      @deployment = Deployment.new
+      @deployment.stage = @stage
+      @deployment.user = current_user.login
+      @deployment.project = @stage.project
+      @deployment.status = :running
+      @deployment.new_revision = @stage.get_next_version
+      @deployment.old_revision = @stage.get_current_version
+      @deployment.log = ''
+      @deployment.save
+
+      @runner = Runner.new @deployment
+      Celluloid::Actor["deployment_#{@deployment.id}"] = @runner
+      @runner.async.deploy @stage.rollback_cmd
       notice = 'New deployment started'
 
     end

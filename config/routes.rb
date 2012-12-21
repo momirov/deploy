@@ -6,7 +6,8 @@ Deploy::Application.routes.draw do
   resources :projects do
     resources :stages do
       member do
-        get 'run'
+        get 'deploy'
+        get 'rollback'
       end
     end
   end

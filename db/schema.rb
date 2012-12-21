@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121217131644) do
+ActiveRecord::Schema.define(:version => 20121221124638) do
 
   create_table "deployments", :force => true do |t|
     t.integer  "stage_id"
@@ -45,6 +45,7 @@ ActiveRecord::Schema.define(:version => 20121217131644) do
     t.datetime "created_at",          :null => false
     t.datetime "updated_at",          :null => false
     t.integer  "position"
+    t.string   "rollback_cmd"
   end
 
   add_index "stages", ["project_id"], :name => "index_stages_on_project_id"
