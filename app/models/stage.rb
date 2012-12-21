@@ -15,7 +15,7 @@ class Stage < ActiveRecord::Base
   end
 
   def get_next_version
-    %x{#{next_version_cmd}}
+    %x{#{next_version_cmd}}.strip!
   end
 
   def log

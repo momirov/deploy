@@ -33,7 +33,6 @@ PrivatePub.subscribe "/deployments/new", (data, channel) ->
     $("#deployment_#{data.deployment.id} td span").removeClass('label-inverse').addClass('label-success').html('completed')
     $("#deployment_#{data.deployment.id} td a.btn-danger").remove()
 
-
   if data.deployment.status == 'error'
     $("#deployment_#{data.deployment.id} .spinner").remove()
     $("#deployment_#{data.deployment.id} td span").removeClass('label-inverse').addClass('label-important').html('error')

@@ -1,12 +1,15 @@
-div.page-header
-  h2  Deploy #{@project.title}
+div.row-fluid.page-header
+  div.span3
+    h2  Deploy #{@project.title}
 
-div.row-fluid
-  ul.revisions
-    li
-      strong Current versions
-      - for stage in @project.stages
-        li #{stage.title}: #{stage.get_current_version}
+  div.span9
+    ul.revisions
+      li
+        strong Current versions
+        - for stage in @project.stages
+          li
+            | #{stage.title}:
+            span class=(stage.get_current_version == stage.get_next_version ? 'text-success' : 'text-warning') #{stage.get_current_version}
 
 div.row-fluid
   div.span3

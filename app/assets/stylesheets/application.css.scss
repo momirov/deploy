@@ -48,6 +48,7 @@ td.actions a {
   border: 1px solid #E6E6E6;
   margin-bottom: 35px;
   padding:10px 15px 25px;
+  border-radius: 4px / 4px;
 }
 .arrow_box:after, .arrow_box:before {
   top: 100%;
@@ -81,7 +82,7 @@ td.actions a {
 }
 
 .revisions {
-  margin: 0 0 10px 0;
+  margin: 22px 0 0 0;
   li {
     display: inline-block;
     margin-right: 40px;
