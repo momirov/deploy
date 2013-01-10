@@ -58,8 +58,6 @@ module Deploy
 
     # Version of your assets, change this if you want to expire all your assets
     config.assets.version = '1.0'
-
-    config.youtube_dev_key = 'AI39si77jqC2ReufVmM9SZzOPVUp5H6CJMXqpkRJf0oiWZmCfv8ATRVx2B3RAtL0iFKRlHlD3yYd8O2CL_gq8uYpZNtYVoMmsA'
   end
 end
 

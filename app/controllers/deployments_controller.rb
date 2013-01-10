@@ -1,5 +1,3 @@
-require 'youtube_it'
-
 class DeploymentsController < ApplicationController
   # GET /deployments
   # GET /deployments.json
