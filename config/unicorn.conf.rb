@@ -15,6 +15,10 @@ pid pid_path
 stderr_path "log/unicorn-err.log"
 stdout_path "log/unicorn-out.log"
 
+before_exec do |server|
+  ENV['BUNDLE_GEMFILE'] = "/home/shippingeasy/deployment/current/Gemfile"
+end
+
 before_fork do |server, worker|
   # http://codelevy.com/2010/02/09/getting-started-with-unicorn.html
   old_pid = "#{pid_path}.oldbin"
