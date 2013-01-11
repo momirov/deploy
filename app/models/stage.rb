@@ -9,7 +9,7 @@ class Stage < ActiveRecord::Base
       %x{#{current_version_cmd}}
     end
 
-    if revision.chomp.length == 40
+    if revision && revision.chomp.length == 40
       revision.slice!(0, 7)
     end
   end
