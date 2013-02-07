@@ -4,10 +4,10 @@ require "bundler/capistrano"
 set :application, "Deployment"
 set :repository,  "ssh://gerrit.saturized.com:29418/deploy"
 set :deploy_to, "/srv/http/deployment"
-set :user, "root"
+set :user, "deploy"
 set :use_sudo, false
 set :scm, :git
-default_run_options[:shell] = '/usr/bin/fish'
+default_run_options[:shell] = '/bin/bash'
 
 set :unicorn_pid, "#{current_path}/tmp/pids/unicorn.pid"
 
