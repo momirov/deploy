@@ -65,5 +65,5 @@ Deploy::Application.configure do
   # with SQLite, MySQL, and PostgreSQL)
   # config.active_record.auto_explain_threshold_in_seconds = 0.5
 
-  config.project_checkout_path = Pathname.new('/home/shippingeasy/projects')
+  config.project_checkout_path = Pathname.new('/home/deploy/projects')
 end
