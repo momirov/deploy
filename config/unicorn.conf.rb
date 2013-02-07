@@ -6,7 +6,7 @@
 # See also http://unicorn.bogomips.org/examples/unicorn.conf.rb for
 # a more verbose configuration using more features.
 
-listen "/home/shippingeasy/deployment/current/tmp/pids/unicorn.sock", :backlog => 1024
+listen "/srv/http/deployment/current/tmp/pids/unicorn.sock", :backlog => 1024
 worker_processes 2 # this should be >= nr_cpus
 pid_path = "tmp/pids/unicorn.pid"
 timeout 30
@@ -16,7 +16,7 @@ stderr_path "log/unicorn-err.log"
 stdout_path "log/unicorn-out.log"
 
 before_exec do |server|
-  ENV['BUNDLE_GEMFILE'] = "/home/shippingeasy/deployment/current/Gemfile"
+  ENV['BUNDLE_GEMFILE'] = "/srv/http/deployment/current/Gemfile"
 end
 
 before_fork do |server, worker|

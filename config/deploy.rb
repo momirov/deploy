@@ -3,14 +3,11 @@ require "bundler/capistrano"
 
 set :application, "Deployment"
 set :repository,  "ssh://gerrit.saturized.com:29418/deployment"
-set :deploy_to, "/home/shippingeasy/deployment/"
-set :user, "shippingeasy"
+set :deploy_to, "/srv/http/deployment"
+set :user, "root"
 set :use_sudo, false
 set :scm, :git
-default_run_options[:shell] = '/bin/bash'
-set :default_environment, {
-  "PATH" => "/home/#{user}/.rbenv/shims:/home/#{user}/.rbenv/bin:$PATH",
-}
+default_run_options[:shell] = '/usr/bin/fish'
 
 set :unicorn_pid, "#{current_path}/tmp/pids/unicorn.pid"
 

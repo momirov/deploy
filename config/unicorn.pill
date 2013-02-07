@@ -4,9 +4,9 @@
 #
 
 # Set paths
-home_dir = "/home/shippingeasy"
+home_dir = "/srv/http"
 rails_shared = "#{home_dir}/deployment/shared"
-unicorn_path = "/home/shippingeasy/.rbenv/shims/unicorn"
+unicorn_path = "/home/deploy/.rbenv/shims/unicorn"
 
 # Set environment variables
 rails_env = ENV['RAILS_ENV'] || 'production'
