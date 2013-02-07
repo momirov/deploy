@@ -2,7 +2,7 @@
 require "bundler/capistrano"
 
 set :application, "Deployment"
-set :repository,  "ssh://gerrit.saturized.com:29418/deployment"
+set :repository,  "ssh://gerrit.saturized.com:29418/deploy"
 set :deploy_to, "/srv/http/deployment"
 set :user, "root"
 set :use_sudo, false
