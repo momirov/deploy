@@ -37,10 +37,8 @@ SimpleNavigation::Configuration.run do |navigation|
     primary.dom_class = 'nav'
     primary.item :home, "Home", root_url, :if => Proc.new { user_signed_in? }, :icon => 'icon-home'
 
-    primary.item :projects, "Projects", projects_url, :if => Proc.new { user_signed_in? }, :icon => 'icon-upload' do |projects|
-      Project.all.each do |project|
-        projects.item project.title, project.try(:title), url_for(project)
-      end
+    Project.all.each do |project|
+     primary.item project.title, project.try(:title), url_for(project)
     end
 
     primary.item :login, 'Login', new_user_session_path, :unless => Proc.new { user_signed_in? }
