@@ -11,6 +11,11 @@ html
     div.navbar.navbar-inverse.navbar-fixed-top
       div.navbar-inner
         .container-fluid
+          button.btn.btn-navbar.collapsed data-toggle="collapse" data-target=".nav-collapse" type="button"
+            span.icon-bar
+            span.icon-bar
+            span.icon-bar
+
           = link_to 'New Fast Automatic F-REEK', root_path, :class => 'brand'
           .nav-collapse.collapse.navbar-responsive-collapse
             = render_navigation :expand_all => true, :renderer => :bootstrap

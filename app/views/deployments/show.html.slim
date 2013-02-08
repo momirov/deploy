@@ -1,27 +1,30 @@
-p.youtube
+div.row-fluid
+  div.span5
+    div.youtube
 
-p
- = link_to "Back to #{@deployment.project.title}", @deployment.project
+  div.span7
+    p
+     = link_to "Back to #{@deployment.project.title}", @deployment.project
 
-p
-  strong Stage:
-  = @deployment.stage.title
-p
-  strong Project:
-  = @deployment.project.title
-p
-  strong User:
-  = @deployment.user
-p
-  strong Status:
-  span.status = @deployment.status
-  
-p
-  strong Log:
-  pre#deployment-log = @deployment.log.html_safe
+    p
+      strong Stage:
+      = @deployment.stage.title
+    p
+      strong Project:
+      = @deployment.project.title
+    p
+      strong User:
+      = @deployment.user
+    p
+      strong Status:
+      span.status = @deployment.status
 
-p
-  strong Run time:
-  = distance_of_time_in_words(@deployment.created_at, @deployment.completed_at, true) if @deployment.completed_at?
+    p
+      strong Log:
+      pre#deployment-log = @deployment.log.html_safe
+
+    p
+      strong Run time:
+      = distance_of_time_in_words(@deployment.created_at, @deployment.completed_at, true) if @deployment.completed_at?
 
 = subscribe_to "/deployments/#{@deployment.id}"
