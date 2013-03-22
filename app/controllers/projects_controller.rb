@@ -9,6 +9,14 @@ class ProjectsController < ApplicationController
     end
   end
 
+  def diff
+    @diff = Project.find(params[:id]).diff(params[:commit], params[:head])
+    respond_to do |format|
+      format.html # diff.html.slim
+      format.json { render json: @diff }
+    end
+  end
+
   # GET /projects/1
   # GET /projects/1.json
   def show

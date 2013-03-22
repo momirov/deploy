@@ -1,11 +1,18 @@
 class Stage < ActiveRecord::Base
   belongs_to :project
   has_many :deployments
-  attr_accessible :current_version_cmd, :deploy_cmd, :next_version_cmd, :title, :position, :rollback_cmd
+  attr_accessible :current_version_cmd,
+                  :deploy_cmd,
+                  :next_version_cmd,
+                  :title,
+                  :position,
+                  :rollback_cmd
+
   acts_as_list :scope => :project
 
   def get_current_version
-    revision = Rails.cache.fetch("stage_revision_#{self.id}", :expires_in => 24.hours) do
+    revision = Rails.cache.fetch("stage_revision_#{self.id}",
+                                 :expires_in => 24.hours) do
       %x{#{current_version_cmd}}
     end
 

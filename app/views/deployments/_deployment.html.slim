@@ -4,7 +4,10 @@
   td = deployment.stage.title
   td = deployment.user
   td 
-    a href="http://gerrit.saturized.com/gitweb?p=shippingeasy.git;a=commitdiff;hp=#{deployment.old_revision};h=#{deployment.new_revision};ds=sidebyside" #{deployment.old_revision} -> #{deployment.new_revision}
+    = link_to "#{deployment.old_revision} -> #{deployment.new_revision}",
+              diff_project_path(deployment.project,
+                                deployment.old_revision,
+                                deployment.new_revision)
   td = deployment.created_at.to_s(:short)
   td.duration = distance_of_time_in_words(deployment.created_at, deployment.completed_at, true) if deployment.completed_at?
   td

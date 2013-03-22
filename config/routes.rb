@@ -4,10 +4,13 @@ Deploy::Application.routes.draw do
   end
 
   resources :projects do
+    member do
+      get 'diff/:commit(/:head)', :action => :diff, :as => :diff
+    end
     resources :stages do
       member do
-        get 'deploy'
-        get 'rollback'
+        get :deploy
+        get :rollback
       end
     end
   end

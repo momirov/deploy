@@ -27,4 +27,10 @@ class Project < ActiveRecord::Base
   def get_dir_path
     Deploy::Application.config.project_checkout_path.join(id.to_s)
   end
+
+  def diff(commit, head)
+    # todo: optimize this, it is not cool to update repo before every diff
+    pull
+    %x{cd #{get_dir_path} && git diff #{commit} #{head}}
+  end
 end
