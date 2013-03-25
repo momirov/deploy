@@ -9,18 +9,15 @@ div.row-fluid.page-header
         - for stage in @project.stages
           li
             ' #{stage.title}:
-            span class=(stage.get_current_version == stage.get_next_version ? 'text-success' : 'text-warning') #{stage.get_current_version}
+            span id="current-version-#{stage.id}" data-url="#{current_version_project_stage_path(@project, stage)}"
 
 div.row-fluid
-  div.span3
+  div.environments.span3
     - @project.stages.each do |stage|
       div.arrow_box
         h3
           ' Deploy
-          = link_to stage.get_next_version,
-                    diff_project_path(@project,
-                                      stage.get_current_version,
-                                      stage.get_next_version) if stage.get_next_version
+          span id="deploy-version-#{stage.id}" data-url="#{next_version_project_stage_path(@project, stage)}"
           '  to #{stage.title}
         = link_to 'Deploy', deploy_project_stage_path(stage.project, stage), :class =>'btn btn-large btn-success', :disable_with => "Please wait..." if stage.deploy_cmd
         = link_to 'Rollback', rollback_project_stage_path(stage.project, stage), { :class =>'btn btn-large btn-warning pull-right', :disable_with => "Please wait...", :confirm => 'Are you sure?'} if stage.rollback_cmd

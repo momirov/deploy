@@ -11,6 +11,8 @@ Deploy::Application.routes.draw do
       member do
         get :deploy
         get :rollback
+        get :current_version
+        get :next_version
       end
     end
   end

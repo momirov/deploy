@@ -7,9 +7,11 @@ colorTheLog = (data) ->
   $('#deployment-log').html(parser.toHtml(data.split("\n").reverse().join("\n")));
 
 $ ->
+  # color the log on deployment show
   if $('#deployment-log').length > 0
     colorTheLog($('#deployment-log').html())
 
+  # spinner for labels
   $(".label-inverse").parent().spin
     lines: 9 # The number of lines to draw
     length: 1 # The length of each line
@@ -27,6 +29,14 @@ $ ->
     top: '0' # Top position relative to parent in px
     left: '-30' # Left position relative to parent in px
 
+  # lazy load current versions so original page load is faster
+  $('.revisions span').each (index) ->
+    $.getScript($(this).data('url'))
+
+  # lazy load diff links in left sidebar for speed
+  $('.environments span').each (index) ->
+    $.getScript($(this).data('url'))
+
 PrivatePub.subscribe "/deployments/new", (data, channel) ->
   if data.deployment.status == 'completed'
     $("#deployment_#{data.deployment.id} .spinner").remove()
@@ -37,7 +47,7 @@ PrivatePub.subscribe "/deployments/new", (data, channel) ->
     $("#deployment_#{data.deployment.id} .spinner").remove()
     $("#deployment_#{data.deployment.id} td span").removeClass('label-inverse').addClass('label-important').html('error')
     $("#deployment_#{data.deployment.id} td a.btn-danger").remove()
-  
+
 PrivatePub.subscribe "/deployments/#{gon.deployment.id}", (data, channel) ->
   colorTheLog(data.deployment.log)
   $('.status').html(data.deployment.status)

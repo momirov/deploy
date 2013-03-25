@@ -21,6 +21,25 @@ class StagesController < ApplicationController
     end
   end
 
+  def current_version
+    @stage = Stage.find(params[:id])
+
+    respond_to do |format|
+      format.html # version.html.erb
+      format.js
+    end
+  end
+
+  def next_version
+    @stage = Stage.find(params[:id])
+
+    respond_to do |format|
+      format.html # version.html.erb
+      format.js
+    end
+  end
+
+
   def deploy
     @stage = Stage.find(params[:id])
 
