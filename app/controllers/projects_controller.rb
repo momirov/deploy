@@ -10,7 +10,10 @@ class ProjectsController < ApplicationController
   end
 
   def diff
-    @diff = Project.find(params[:id]).diff(params[:commit], params[:head])
+    @project = Project.find(params[:id])
+    @diff = @project.diff(params[:commit], params[:head])
+    @log = @project.log(params[:commit], params[:head])
+
     respond_to do |format|
       format.html # diff.html.slim
       format.json { render json: @diff }

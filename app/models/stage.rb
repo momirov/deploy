@@ -15,14 +15,15 @@ class Stage < ActiveRecord::Base
                                  :expires_in => 24.hours) do
       %x{#{current_version_cmd}}
     end
-
-    if revision && revision.chomp.length == 40
-      revision.slice!(0, 7)
-    end
+    revision.strip
   end
 
   def get_next_version
     %x{#{next_version_cmd}}.strip!
+  end
+
+  def get_next_version_short
+    get_next_version.slice!(0, 7)
   end
 
   def log

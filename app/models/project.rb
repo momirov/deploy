@@ -15,6 +15,10 @@ class Project < ActiveRecord::Base
     system("cd #{get_dir.path} && git fetch && git reset --hard origin/master")
   end
 
+  def get_repo
+    @repo = Rugged::Repository.new(get_dir.path)
+  end
+
   def get_dir
     # create dir
     if !File.directory? get_dir_path
@@ -33,4 +37,15 @@ class Project < ActiveRecord::Base
     pull
     %x{cd #{get_dir_path} && git diff #{commit} #{head}}
   end
+
+  def log(commit, head)
+    walker = Rugged::Walker.new(get_repo)
+    walker.push(head)
+    walker.hide(commit)
+    walker.each do |c|
+      puts c.inspect
+    end
+    %x{cd #{get_dir_path} && git log --format='%h %cr %s %cn' #{commit}..#{head}}
+  end
+
 end
