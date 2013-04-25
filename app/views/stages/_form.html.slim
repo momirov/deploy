@@ -9,18 +9,18 @@
     = f.label :title
     = f.text_field :title
   .field
-    = f.label :deploy_cmd
+    = f.label :deploy_cmd, 'Deploy command'
     = f.text_field :deploy_cmd
   .field
-    = f.label :rollback_cmd
+    = f.label :rollback_cmd, 'Rollback command'
     = f.text_field :rollback_cmd
   .field
-    = f.label :current_version_cmd
+    = f.label :current_version_cmd, 'Current version command'
     = f.text_field :current_version_cmd
   .field
-    = f.label :next_version_cmd
+    = f.label :next_version_cmd, 'Next version command'
     = f.text_field :next_version_cmd
   .field
     = f.label :position
     = f.text_field :position
-  .actions = f.submit 'Save'
+  .actions = f.submit 'Save', class: 'btn'
