@@ -31,6 +31,10 @@ class Stage < ActiveRecord::Base
     get_next_version.slice!(0, 7)
   end
 
+  def get_current_version_short
+    get_current_version.slice!(0, 7)
+  end
+
   def log
     @log
   end

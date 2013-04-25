@@ -1,1 +1,1 @@
-$("#current-version-<%= @stage.id %>").replaceWith('<span class="<%= @stage.get_current_version == @stage.get_next_version ? 'text-success' : 'text-warning' %>"><%= @stage.get_next_version_short %></span>');
+$("#current-version-<%= @stage.id %>").replaceWith('<span class="<%= @stage.get_current_version == @stage.get_next_version ? 'text-success' : 'text-warning' %>"><%= @stage.get_current_version_short %></span>');
