@@ -10,6 +10,11 @@ class Stage < ActiveRecord::Base
 
   acts_as_list :scope => :project
 
+  validates :title, :presence => true
+  validates :deploy_cmd, :presence => true
+  validates :next_version_cmd, :presence => true
+  validates :current_version_cmd, :presence => true
+
   def get_current_version
     revision = Rails.cache.fetch("stage_revision_#{self.id}",
                                  :expires_in => 24.hours) do
