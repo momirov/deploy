@@ -1,9 +1,20 @@
 h2 How to work with deploy
 
-p
-
 h3 Adding projects to deploy
-h3 Configuring stages
-h3 Viewing changes
+
+p When adding projects to deploy you have to know title of the project and git repo url, that is it.
+
+h3 Configuring deploy stages
+
+p Stages configuration is a bit complex at the moment. It takes 5 things to make a stage work:
+
+ol
+  li Title of the stage (required). Example: <code>My awesome new project</code>
+  li Deploy command (required), this command will be executed on deploy, it should be commited in the repo. Example for capistrano users: <code>cap daily deploy:migrations</code>
+  li Rollback cmd (optional), this command will be executed on code rollback if something goes wrong, it should be commited in the repo. Example for capistrano users: <code>cap daily deploy:rollback</code>
+  li Current version command (required), this command will be used to get current version hash to be used in diffs. Example: <code>curl -k https://daily.vpn.shippingeasy.com/REVISION</code>
+  li Next version command (required), this command will be used to get version hash that is to be deployed on the servers. Example: <code>git ls-remote ssh://gerrit.saturized.com:29418/shippingeasy HEAD | cut -c1-40</code>
+
 h3 Deploying
+p Just click on Deploy and enjoy!
 
