@@ -94,6 +94,7 @@ GEM
     gon (4.1.0)
       actionpack (>= 2.3.0)
       json
+    high_voltage (1.2.2)
     highline (1.6.18)
     hike (1.2.2)
     http_parser.rb (0.5.3)
@@ -216,6 +217,7 @@ DEPENDENCIES
   devise_ldap_authenticatable
   dotiw
   gon
+  high_voltage
   jquery-rails
   kaminari
   pg

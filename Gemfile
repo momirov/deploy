@@ -43,3 +43,4 @@ gem 'bootstrap-kaminari-views'
 gem 'dotiw'
 gem 'unicorn'
 gem 'rugged'
+gem 'high_voltage' # static pages
