@@ -1,7 +1,7 @@
 doctype html
 html
   head
-    title New Fast Automatic F-REEK
+    title Depturized
     = include_gon
     = javascript_include_tag "application"
     = stylesheet_link_tag    "application", :media => "all"
@@ -16,7 +16,7 @@ html
             span.icon-bar
             span.icon-bar
 
-          = link_to 'New Fast Automatic F-REEK', root_path, :class => 'brand'
+          = link_to 'Depturized', root_path, :class => 'brand'
           .nav-collapse.collapse.navbar-responsive-collapse
             = render_navigation :expand_all => true, :renderer => :bootstrap
             - if user_signed_in?
