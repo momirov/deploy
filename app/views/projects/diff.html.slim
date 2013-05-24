@@ -1,4 +1,7 @@
 h4 Commits
-pre #{@log}
+pre
+  - for commit in @log do
+    = commit.message
+
 h4 Diff
 pre #{@diff}

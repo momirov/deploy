@@ -35,17 +35,17 @@ class Project < ActiveRecord::Base
   def diff(commit, head)
     # todo: optimize this, it is not cool to update repo before every diff
     pull
-    %x{cd #{get_dir_path} && git diff #{commit} #{head}}
+    start = Rugged::Tree.lookup(get_repo, commit).tree
+    stop = Rugged::Tree.lookup(get_repo, head).tree
+    diff = start.diff(stop, :context_lines => 3, :interhunk_lines => 1)
+    diff.patch
   end
 
   def log(commit, head)
     walker = Rugged::Walker.new(get_repo)
     walker.push(head)
     walker.hide(commit)
-    walker.each do |c|
-      puts c.inspect
-    end
-    %x{cd #{get_dir_path} && git log --format='%h %cr %s %cn' #{commit}..#{head}}
+    walker.each.to_a
   end
 
 end

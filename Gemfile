@@ -42,5 +42,5 @@ gem 'kaminari'
 gem 'bootstrap-kaminari-views'
 gem 'dotiw'
 gem 'unicorn'
-gem 'rugged'
+gem 'rugged', :git => 'https://github.com/libgit2/rugged.git', :branch => 'development', :submodules => true
 gem 'high_voltage' # static pages
