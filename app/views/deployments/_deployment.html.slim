@@ -4,7 +4,7 @@
   td = deployment.stage.title
   td = deployment.user
   td 
-    = link_to "#{deployment.old_revision} -> #{deployment.new_revision}",
+    = link_to "#{deployment.old_revision[0, 7]} -> #{deployment.new_revision[0, 7]}",
               diff_project_path(deployment.project,
                                 deployment.old_revision,
                                 deployment.new_revision)
