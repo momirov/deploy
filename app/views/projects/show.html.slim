@@ -27,6 +27,6 @@ div.row-fluid
         = render deploy
     = paginate @deployments
 
-= link_to 'Back', projects_path
+= link_to 'Back', projects_path, :class => 'btn btn-inverse'
 
 = subscribe_to "/deployments/new"

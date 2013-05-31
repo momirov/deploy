@@ -4,7 +4,7 @@ div.row-fluid
 
   div.span7
     p
-     = link_to "Back to #{@deployment.project.title}", @deployment.project
+     = link_to "Back to #{@deployment.project.title}", @deployment.project, :class => 'btn btn-inverse'
 
     p
       strong Stage:

@@ -4,9 +4,12 @@
 
 .patch, .patch td {
   font-family: Monaco, monospace;
-  margin-bottom: 30px;
   font-size: 12px;
   line-height: 18px;
+}
+
+.patch {
+  margin-bottom: 30px;
 }
 
 .patch table tr:hover {
