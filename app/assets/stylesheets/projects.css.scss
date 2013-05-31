@@ -9,6 +9,10 @@
   line-height: 18px;
 }
 
+.patch table tr:hover {
+  background-color: #f8eec7;
+}
+
 .diff-line {
   white-space: pre;
 }
