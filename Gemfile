@@ -44,3 +44,4 @@ gem 'dotiw'
 gem 'unicorn'
 gem 'rugged', :git => 'https://github.com/libgit2/rugged.git', :branch => 'development', :submodules => true
 gem 'high_voltage' # static pages
+gem 'gravatar-ultimate'
