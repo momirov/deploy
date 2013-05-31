@@ -20,8 +20,7 @@ div.row-fluid
           span id="deploy-version-#{stage.id}" data-url="#{next_version_project_stage_path(@project, stage)}"
           '  to #{stage.title}
         = link_to 'Deploy', deploy_project_stage_path(stage.project, stage), :class =>'btn btn-large btn-success', :disable_with => "Please wait..." if stage.deploy_cmd
-        = link_to 'Rollback', rollback_project_stage_path(stage.project, stage), { :class =>'btn btn-large btn-warning pull-right', :disable_with => "Please wait...", :confirm => 'Are you sure?'} if stage.rollback_cmd
-
+        = link_to 'Rollback', rollback_project_stage_path(stage.project, stage), { :class =>'btn btn-large btn-warning pull-right', :disable_with => "Please wait...", :confirm => 'Are you sure?'} unless stage.rollback_cmd.empty?
   div.span9
     table
       - @deployments.each do |deploy|
