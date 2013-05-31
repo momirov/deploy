@@ -1,7 +1,9 @@
 h4 Commits
-pre
-  - for commit in @log do
-    = commit.message
+- for commit in @log do
+
+  div.well.well-small
+    = simple_format(commit.message)
+    strong By #{commit.author[:name]}
 
 h4 Diff
-pre #{@diff}
+pre = @diff
