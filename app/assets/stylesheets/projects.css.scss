@@ -1,3 +1,29 @@
 // Place all the styles related to the Projects controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.patch, .patch td {
+  font-family: Monaco, monospace;
+  margin-bottom: 30px;
+  font-size: 12px;
+  line-height: 18px;
+}
+
+.diff-line {
+  white-space: pre;
+}
+
+.deleted {
+  background-color: #fdd;
+}
+
+.added {
+  background-color: #dfd;
+}
+.header {
+  background-color: #f8f8ff;
+  color: #999;
+}
+.media-object {
+  border-radius: 40px;
+}

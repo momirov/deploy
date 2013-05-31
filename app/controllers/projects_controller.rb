@@ -11,7 +11,8 @@ class ProjectsController < ApplicationController
 
   def diff
     @project = Project.find(params[:id])
-    @diff = @project.diff(params[:commit], params[:head])
+    parser = GitDiffParser.new @project.diff(params[:commit], params[:head])
+    @diff = parser.to_html
     @log = @project.log(params[:commit], params[:head])
 
     respond_to do |format|

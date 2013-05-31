@@ -1,9 +1,28 @@
 h4 Commits
 - for commit in @log do
+  div class="media"
+    a class="pull-left" href="#"
+      img class="media-object" src="#{avatar_url(commit.author[:email])}"
 
-  div.well.well-small
-    = simple_format(commit.message)
-    strong By #{commit.author[:name]}
+    div class="media-body"
+      h4 class="media-heading" = commit.author[:name]
+      = simple_format(commit.message)
 
 h4 Diff
-pre = @diff
+- for patch in @diff do
+  div.patch
+    strong = patch.delta.new_file[:path]
+    table
+      - patch.each_hunk do |hunk|
+        tr.header
+          td ...
+          td ...
+          td = hunk.header
+        - hunk.each_line do |line|
+          - classes = Array.new
+          - classes << 'deleted' if line.deletion?
+          - classes << 'added' if line.addition?
+          tr class=classes
+            td = line.old_lineno unless line.old_lineno == -1
+            td = line.new_lineno unless line.new_lineno == -1
+            td.diff-line = line.content

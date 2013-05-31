@@ -37,8 +37,7 @@ class Project < ActiveRecord::Base
     pull
     start = Rugged::Tree.lookup(get_repo, commit).tree
     stop = Rugged::Tree.lookup(get_repo, head).tree
-    diff = start.diff(stop, :context_lines => 3, :interhunk_lines => 1)
-    diff.patch
+    start.diff(stop, :context_lines => 3, :interhunk_lines => 1)
   end
 
   def log(commit, head)
