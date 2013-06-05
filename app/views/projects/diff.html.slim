@@ -12,7 +12,7 @@ h4 Commits
 
     div class="media-body"
       h4 class="media-heading" = commit.author[:name]
-      = simple_format(commit.message)
+      == format_message(commit.message)
 
 h4 Diff
 - for patch in @diff do
