@@ -15,4 +15,8 @@ module ApplicationHelper
     end
     content_tag :span, status, :class => cls
   end
+
+  def base64_image(image)
+    ActiveSupport::Base64.encode64(image)
+  end
 end

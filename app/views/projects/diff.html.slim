@@ -1,8 +1,14 @@
+#controls
+  =' link_to 'top', '#top', class: 'btn btn-success'
+  = link_to 'back', project_path(@project), class: 'btn btn-success'
 h4 Commits
 - for commit in @log do
   div class="media"
     a class="pull-left" href="#"
-      img width=80 height=80 class="media-object" src="data:image/png;base64,#{ActiveSupport::Base64.encode64(Gravatar.new(commit.author[:email]).image_data(:d => 'mm'))}"
+      img [ width=80
+            height=80
+            class="media-object"
+            src="data:image/png;base64,#{base64_image(Gravatar.new(commit.author[:email]).image_data(:d => 'mm'))}" ]
 
     div class="media-body"
       h4 class="media-heading" = commit.author[:name]
