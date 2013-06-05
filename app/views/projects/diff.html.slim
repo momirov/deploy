@@ -8,7 +8,7 @@ h4 Commits
       img [ width=80
             height=80
             class="media-object"
-            src="data:image/png;base64,#{base64_image(Gravatar.new(commit.author[:email]).image_data(:d => 'mm'))}" ]
+            src="data:image/png;base64,#{embed_gravatar(commit.author[:email])}" ]
 
     div class="media-body"
       h4 class="media-heading" = commit.author[:name]

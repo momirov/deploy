@@ -19,4 +19,8 @@ module ApplicationHelper
   def base64_image(image)
     ActiveSupport::Base64.encode64(image)
   end
+
+  def embed_gravatar(email)
+    base64_image(Gravatar.new(email).image_data(:d => 'mm'))
+  end
 end
