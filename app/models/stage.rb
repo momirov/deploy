@@ -16,11 +16,7 @@ class Stage < ActiveRecord::Base
   validates :current_version_cmd, :presence => true
 
   def get_current_version
-    revision = Rails.cache.fetch("stage_revision_#{self.id}",
-                                 :expires_in => 24.hours) do
-      %x{#{current_version_cmd}}
-    end
-    revision.strip
+    %x{#{current_version_cmd}}.strip!
   end
 
   def get_next_version
