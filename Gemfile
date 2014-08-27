@@ -35,7 +35,6 @@ group :development do
   gem 'sqlite3'
 end
 
-gem 'capistrano_colors'
 gem 'simple-navigation'
 gem 'simple-navigation-bootstrap'
 gem 'celluloid'
