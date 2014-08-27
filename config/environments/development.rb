@@ -1,3 +1,5 @@
+require 'pusher'
+
 Deploy::Application.configure do
   # Settings specified here will take precedence over those in config/application.rb
 
@@ -36,4 +38,9 @@ Deploy::Application.configure do
   config.assets.debug = true
 
   config.project_checkout_path = Rails.root.join('..', 'deploy_projects')
+
+  Pusher.app_id = 87380
+  Pusher.key = 'ad3b3ac62e18e65df34b'
+  Pusher.secret = 'c108dd2a9e203074bd77'
+
 end

@@ -26,5 +26,3 @@ div.row-fluid
     p
       strong Run time:
       = distance_of_time_in_words(@deployment.created_at, @deployment.completed_at, true) if @deployment.completed_at?
-
-= subscribe_to "/deployments/#{@deployment.id}"

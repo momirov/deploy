@@ -37,7 +37,14 @@ $ ->
   $('.environments span').each (index) ->
     $.getScript($(this).data('url'))
 
-PrivatePub.subscribe "/deployments/new", (data, channel) ->
+pusher = new Pusher('ad3b3ac62e18e65df34b')
+channel = pusher.subscribe('deployment')
+
+channel.bind 'update_log', (data) ->
+  colorTheLog(data.deployment.log)
+  $('.status').html(data.deployment.status)
+
+channel.bind 'finished', (data) ->
   if data.deployment.status == 'completed'
     $("#deployment_#{data.deployment.id} .spinner").remove()
     $("#deployment_#{data.deployment.id} td span").removeClass('label-inverse').addClass('label-success').html('completed')
@@ -48,6 +55,9 @@ PrivatePub.subscribe "/deployments/new", (data, channel) ->
     $("#deployment_#{data.deployment.id} td span").removeClass('label-inverse').addClass('label-important').html('error')
     $("#deployment_#{data.deployment.id} td a.btn-danger").remove()
 
-PrivatePub.subscribe "/deployments/#{gon.deployment.id}", (data, channel) ->
-  colorTheLog(data.deployment.log)
-  $('.status').html(data.deployment.status)
+
+
+
+
+
+

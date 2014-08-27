@@ -14,5 +14,4 @@
 //= require jquery_ujs
 //= require jquery.spin
 //= require twitter/bootstrap
-//= require private_pub
 //= require_tree .
