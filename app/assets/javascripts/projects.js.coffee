@@ -2,9 +2,9 @@
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
 
+parser = new ansi()
 colorTheLog = (data) ->
-  parser = new ansi();
-  $('#deployment-log').html(parser.toHtml(data.split("\n").reverse().join("\n")));
+  $('#deployment-log').prepend(parser.toHtml(data.split("\n").reverse().join("\n")));
 
 $ ->
   # color the log on deployment show
@@ -37,23 +37,24 @@ $ ->
   $('.environments span').each (index) ->
     $.getScript($(this).data('url'))
 
-pusher = new Pusher('ad3b3ac62e18e65df34b')
-channel = pusher.subscribe('deployment')
+  pusher = new Pusher('ad3b3ac62e18e65df34b')
+  statusChannel = pusher.subscribe('deployment')
+  if $("#deployment").data('id') != null
+    deploymentChannel = pusher.subscribe('deployment_' + $("#deployment").data('id'));
+    deploymentChannel.bind 'update_log', (data) ->
+      colorTheLog(data.new_line)
+      $('.status').html(data.status)
 
-channel.bind 'update_log', (data) ->
-  colorTheLog(data.deployment.log)
-  $('.status').html(data.deployment.status)
+  statusChannel.bind 'finished', (data) ->
+    if data.status == 'completed'
+      $("#deployment_#{data.id} .spinner").remove()
+      $("#deployment_#{data.id} td span").removeClass('label-inverse').addClass('label-success').html('completed')
+      $("#deployment_#{data.id} td a.btn-danger").remove()
 
-channel.bind 'finished', (data) ->
-  if data.deployment.status == 'completed'
-    $("#deployment_#{data.deployment.id} .spinner").remove()
-    $("#deployment_#{data.deployment.id} td span").removeClass('label-inverse').addClass('label-success').html('completed')
-    $("#deployment_#{data.deployment.id} td a.btn-danger").remove()
-
-  if data.deployment.status == 'error'
-    $("#deployment_#{data.deployment.id} .spinner").remove()
-    $("#deployment_#{data.deployment.id} td span").removeClass('label-inverse').addClass('label-important').html('error')
-    $("#deployment_#{data.deployment.id} td a.btn-danger").remove()
+    if data.status == 'error'
+      $("#deployment_#{data.id} .spinner").remove()
+      $("#deployment_#{data.id} td span").removeClass('label-inverse').addClass('label-important').html('error')
+      $("#deployment_#{data.id} td a.btn-danger").remove()
 
 
 

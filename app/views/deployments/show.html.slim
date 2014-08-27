@@ -2,7 +2,7 @@ div.row-fluid
   div.span5
     div.youtube
 
-  div.span7
+  div.span7#deployment data-id="#{@deployment.id}"
     p
      = link_to "Back to #{@deployment.project.title}", @deployment.project, :class => 'btn btn-inverse'
 

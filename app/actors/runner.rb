@@ -17,6 +17,10 @@ class Runner
         begin
           stdin.each do |line|
             @deployment.log += line
+            Pusher["deployment_#{@deployment.id}"].trigger('update_log', {
+                new_line: line,
+                status: @deployment.status
+            })
             @deployment.save
           end
         rescue Errno::EIO
@@ -34,6 +38,11 @@ class Runner
     
     @deployment.completed_at = Time.now
     @deployment.save
+
+    Pusher["deployment"].trigger('finished', {
+        id: @deployment.id,
+        status: @deployment.status
+    })
 
     # delete version cache
     Rails.cache.delete("stage_revision_#{@deployment.stage.id}")
