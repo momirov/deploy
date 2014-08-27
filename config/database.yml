@@ -21,8 +21,8 @@ test:
 production:
   adapter: postgresql
   encoding: unicode
-  database: deployment_production
+  database: deploy_production
   pool: 5
-  username: deployment
+  username: deploy
   password: horseplasmaftw
 
