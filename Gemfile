@@ -1,21 +1,17 @@
 source 'https://rubygems.org'
 
-gem 'rails', '3.2.8'
+gem 'rails', '~>4.1.0'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
-# Gems used only for assets and not required
-# in production environments by default.
-group :assets do
-  gem 'sass-rails',   '~> 3.2.3'
-  gem 'coffee-rails', '~> 3.2.1'
+gem 'sass-rails', '~> 4.0.0'
+gem 'coffee-rails'
+gem 'uglifier'
+gem 'bootstrap-sass'
+gem 'autoprefixer-rails'
 
-  gem 'uglifier', '>= 1.0.3'
-
-  gem 'anjlab-bootstrap-rails', '>= 2.2', :require => 'bootstrap-rails'
-  gem 'spinjs-rails'
-end
+gem 'spinjs-rails'
 
 gem 'jquery-rails'
 
@@ -47,8 +43,10 @@ gem 'kaminari'
 gem 'bootstrap-kaminari-views'
 gem 'dotiw'
 gem 'unicorn'
-gem 'rugged', :git => 'https://github.com/libgit2/rugged.git', :branch => 'development', :submodules => true
+gem 'rugged'
+
 gem 'high_voltage' # static pages
-gem 'gravatar-ultimate'
+gem 'gravatarify', '~> 3.0.0'
 gem 'foreman'
 gem 'pusher'
+gem 'bootstrap_form'

@@ -1,10 +1,10 @@
 div.row-fluid
-  div.span5
+  div.col-md-5
     div.youtube
 
-  div.span7#deployment data-id="#{@deployment.id}"
+  div.col-md-7#deployment data-id="#{@deployment.id}"
     p
-     = link_to "Back to #{@deployment.project.title}", @deployment.project, :class => 'btn btn-inverse'
+     = link_to "Back to #{@deployment.project.title}", @deployment.project, :class => 'btn btn-primary'
 
     p
       strong Stage:
@@ -18,11 +18,9 @@ div.row-fluid
     p
       strong Status:
       span.status = @deployment.status
-
-    p
-      strong Log:
-      pre#deployment-log = @deployment.log.html_safe
-
     p
       strong Run time:
       = distance_of_time_in_words(@deployment.created_at, @deployment.completed_at, true) if @deployment.completed_at?
+    p
+      strong Log:
+      pre#deployment-log = @deployment.log.html_safe

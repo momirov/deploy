@@ -17,9 +17,9 @@ table.table.table-bordered
       td = stage.current_version_cmd
       td = stage.next_version_cmd
       td
-        =' link_to 'Edit', edit_project_stage_path(stage.project, stage), class: 'btn'
+        =' link_to 'Edit', edit_project_stage_path(stage.project, stage), class: 'btn btn-primary'
         = link_to 'Destroy', [stage.project, stage], :confirm => 'Are you sure?', :method => :delete, :class => 'btn btn-danger'
 
 br
 
-= link_to 'New Stage', new_project_stage_path(@project), :class => 'btn btn-inverse'
+= link_to 'New Stage', new_project_stage_path(@project), :class => 'btn btn-primary'

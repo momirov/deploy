@@ -4,8 +4,6 @@ class User < ActiveRecord::Base
   # :lockable, :timeoutable and :omniauthable
   devise :ldap_authenticatable, :rememberable, :trackable
   
-  # Setup accessible (or protected) attributes for your model
-  attr_accessible :login, :password, :password_confirmation, :remember_me, :email
   # attr_accessible :title, :body
 
   before_save :get_ldap_email

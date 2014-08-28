@@ -1,8 +1,8 @@
-div.row-fluid.page-header
-  div.span3
+div.row.page-header
+  div.col-sm-3
     h2  Deploy #{@project.title}
 
-  div.span9
+  div.col-sm-9
     ul.revisions
       li
         strong Current versions
@@ -11,20 +11,20 @@ div.row-fluid.page-header
             ' #{stage.title}:
             span id="current-version-#{stage.id}" data-url="#{current_version_project_stage_path(@project, stage)}"
 
-div.row-fluid
-  div.environments.span3
+div.row
+  div.environments.col-sm-3
     - @project.stages.each do |stage|
       div.arrow_box
         h3
           ' Deploy
           span id="deploy-version-#{stage.id}" data-url="#{next_version_project_stage_path(@project, stage)}"
           '  to #{stage.title}
-        = link_to 'Deploy', deploy_project_stage_path(stage.project, stage), :class =>'btn btn-large btn-success', :disable_with => "Please wait..." if stage.deploy_cmd
-        = link_to 'Rollback', rollback_project_stage_path(stage.project, stage), { :class =>'btn btn-large btn-warning pull-right', :disable_with => "Please wait...", :confirm => 'Are you sure?'} unless stage.rollback_cmd.empty?
-  div.span9
+        = link_to 'Deploy', deploy_project_stage_path(stage.project, stage), :class =>'btn btn-large btn-success', :data => { disable_with: "Please wait..." } if stage.deploy_cmd
+        = link_to 'Rollback', rollback_project_stage_path(stage.project, stage), { :class =>'btn btn-large btn-warning pull-right', :data => { disable_with: "Please wait...", confirm: 'Are you sure?' }} unless stage.rollback_cmd.empty?
+  div.col-sm-9
     table
       - @deployments.each do |deploy|
         = render deploy
     = paginate @deployments
 
-= link_to 'Back', projects_path, :class => 'btn btn-inverse'
+= link_to 'Back', projects_path, :class => 'btn btn-primary'

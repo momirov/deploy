@@ -1,10 +1,10 @@
 require 'fileutils'
 
 class Project < ActiveRecord::Base
-  attr_accessible :title, :repo
-  has_many :stages, :order => "position"
+  has_many :stages, -> { order(:position) }
   has_many :deployments, :through => :stages
-
+  validates :title, presence: true
+  validates :repo, presence: true
   def pull
     # check if directory is a git repo
     if !system("cd #{get_dir.path} && git rev-parse")
@@ -35,9 +35,7 @@ class Project < ActiveRecord::Base
   def diff(commit, head)
     # todo: optimize this, it is not cool to update repo before every diff
     pull
-    start = Rugged::Tree.lookup(get_repo, commit).tree
-    stop = Rugged::Tree.lookup(get_repo, head).tree
-    start.diff(stop, :context_lines => 3, :interhunk_lines => 1)
+    get_repo.diff(commit, head, :context_lines => 3, :interhunk_lines => 1)
   end
 
   def log(commit, head)

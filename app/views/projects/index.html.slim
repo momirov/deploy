@@ -15,10 +15,10 @@ table.table.table-bordered
         td = project.repo
         td.actions
           = link_to 'Deploy', project, :class => 'btn btn-success'
-          = link_to 'Edit', edit_project_path(project), :class => 'btn'
-          = link_to 'Edit stages', project_stages_path(project), :class => 'btn'
+          = link_to 'Edit', edit_project_path(project), :class => 'btn btn-primary'
+          = link_to 'Edit stages', project_stages_path(project), :class => 'btn btn-primary'
           = link_to 'Destroy', project, :confirm => 'Are you sure?', :method => :delete, :class => 'btn btn-danger'
 
 br
 
-= link_to 'Add Project', new_project_path, :class => 'btn btn-inverse'
+= link_to 'Add Project', new_project_path, :class => 'btn btn-primary'

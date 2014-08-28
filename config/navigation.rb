@@ -34,7 +34,7 @@ SimpleNavigation::Configuration.run do |navigation|
   navigation.selected_class = 'active'
 
   navigation.items do |primary|
-    primary.dom_class = 'nav'
+    primary.dom_class = 'nav navbar-nav'
     primary.item :home, "Home", root_url, :if => Proc.new { user_signed_in? }, :icon => 'icon-home'
 
     Project.all.each do |project|

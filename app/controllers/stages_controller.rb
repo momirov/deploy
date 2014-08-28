@@ -120,7 +120,7 @@ class StagesController < ApplicationController
   # POST /stages.json
   def create
     @project = Project.find(params[:project_id])
-    @stage = @project.stages.create(params[:stage])
+    @stage = @project.stages.create(stage_params)
 
     respond_to do |format|
       if @stage.save
@@ -139,7 +139,7 @@ class StagesController < ApplicationController
     @stage = Stage.find(params[:id])
 
     respond_to do |format|
-      if @stage.update_attributes(params[:stage])
+      if @stage.update_attributes(stage_params)
         format.html { redirect_to project_stages_path @stage.project, notice: 'Stage was successfully updated.' }
         format.json { head :no_content }
       else
@@ -160,4 +160,9 @@ class StagesController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+  private
+    def stage_params
+      params.require(:stage).permit(:title, :deploy_cmd, :rollback_cmd, :position, :current_version_cmd, :next_version_cmd)
+    end
 end

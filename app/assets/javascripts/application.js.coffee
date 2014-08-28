@@ -1,5 +1,5 @@
 #= require jquery
 #= require jquery_ujs
 #= require jquery.spin
-#= require twitter/bootstrap
+#= require bootstrap-sprockets
 #= require_tree .

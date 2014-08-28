@@ -1,12 +1,6 @@
 class Stage < ActiveRecord::Base
   belongs_to :project
   has_many :deployments
-  attr_accessible :current_version_cmd,
-                  :deploy_cmd,
-                  :next_version_cmd,
-                  :title,
-                  :position,
-                  :rollback_cmd
 
   acts_as_list :scope => :project
 
