@@ -1,3 +1,5 @@
+require 'pusher'
+
 Deploy::Application.configure do
   # Settings specified here will take precedence over those in config/application.rb
 
@@ -66,4 +68,8 @@ Deploy::Application.configure do
   # config.active_record.auto_explain_threshold_in_seconds = 0.5
 
   config.project_checkout_path = Pathname.new('/home/deploy/projects')
+
+  Pusher.app_id = 87380
+  Pusher.key = 'ad3b3ac62e18e65df34b'
+  Pusher.secret = 'c108dd2a9e203074bd77'
 end
