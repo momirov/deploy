@@ -39,7 +39,7 @@ $ ->
 
   pusher = new Pusher('ad3b3ac62e18e65df34b')
   statusChannel = pusher.subscribe('deployment')
-  if $("#deployment").data('id') != null
+  if $("#deployment").data('id')
     deploymentChannel = pusher.subscribe('deployment_' + $("#deployment").data('id'));
     deploymentChannel.bind 'update_log', (data) ->
       colorTheLog(data.new_line)
