@@ -25,10 +25,16 @@ html
 
     .container-fluid
       - if flash[:notice]
-        div.alert
+        div.alert.alert-success role="alert"
+          button type="button" class="close" data-dismiss="alert"
+            span aria-hidden="true" &times;
+            span class="sr-only" Close
           == flash[:notice]
 
       - if flash[:error]
-        div.alert.alert-error
+        div.alert.alert-error role="alert"
+          button type="button" class="close" data-dismiss="alert"
+            span aria-hidden="true" &times;
+            span class="sr-only" Close
           == flash[:error]
       == yield
