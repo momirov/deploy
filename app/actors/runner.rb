@@ -13,29 +13,31 @@ class Runner
     @deployment.project.pull
     begin
       deploy_command = cmd.gsub("{user_name}", @deployment.user)
-      PTY.spawn( "cd #{@deployment.project.get_dir_path} && #{deploy_command}" ) do |stdin, stdout, pid|
-        begin
-          stdin.each do |line|
-            @deployment.log += line
-            Pusher["deployment_#{@deployment.id}"].trigger('update_log', {
-                new_line: line,
-                status: @deployment.status
-            })
-            @deployment.save
+      Bundler.with_clean_env do
+        PTY.spawn( "cd #{@deployment.project.get_dir_path} && #{deploy_command}" ) do |stdout, stdin, pid|
+          begin
+            stdout.each do |line|
+              @deployment.log += line
+              Pusher["deployment_#{@deployment.id}"].trigger('update_log', {
+                  new_line: line,
+                  status: @deployment.status
+              })
+              @deployment.save
+            end
+          rescue Errno::EIO
           end
-        rescue Errno::EIO
+          Process.wait(pid)
         end
-        Process.wait(pid)
       end
-    rescue PTY::ChildExited => e  
-    end  
-    
+    rescue PTY::ChildExited => e
+    end
+  
     if $?.exitstatus.to_i > 0
       @deployment.status = :error
     else
       @deployment.status = :completed
     end
-    
+
     @deployment.completed_at = Time.now
     @deployment.save
 
