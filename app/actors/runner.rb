@@ -10,7 +10,7 @@ class Runner
   end
 
   def deploy(cmd)
-    @deployment.project.pull
+    @deployment.project.get_repo
     begin
       deploy_command = cmd.gsub("{user_name}", @deployment.user)
       PTY.spawn( "cd #{@deployment.project.get_dir_path} && #{deploy_command}" ) do |stdin, stdout, pid|

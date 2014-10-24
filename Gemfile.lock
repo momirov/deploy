@@ -194,6 +194,7 @@ GEM
       activesupport (>= 3.0)
       sprockets (~> 2.8)
     sqlite3 (1.3.9)
+    sshkey (1.6.1)
     sshkit (1.5.1)
       colorize
       net-scp (>= 1.1.2)
@@ -318,6 +319,7 @@ DEPENDENCIES
   slim-rails
   spinjs-rails
   sqlite3
+  sshkey
   thin
   uglifier
   unicorn

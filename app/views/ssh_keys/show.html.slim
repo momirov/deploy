@@ -1,0 +1,18 @@
+p#notice = notice
+
+p
+  strong Private key:
+  = @ssh_key.private_key
+p
+  strong Public key:
+  = @ssh_key.public_key
+p
+  strong Comment:
+  = @ssh_key.comment
+p
+  strong Passphrase:
+  = @ssh_key.passphrase
+
+= link_to 'Edit', edit_ssh_key_path(@ssh_key)
+'|
+= link_to 'Back', ssh_keys_path

@@ -1,0 +1,27 @@
+h1 Listing ssh_keys
+
+table
+  thead
+    tr
+      th Private key
+      th Public key
+      th Comment
+      th Passphrase
+      th
+      th
+      th
+
+  tbody
+    - @ssh_keys.each do |ssh_key|
+      tr
+        td = ssh_key.private_key
+        td = ssh_key.public_key
+        td = ssh_key.comment
+        td = ssh_key.passphrase
+        td = link_to 'Show', ssh_key
+        td = link_to 'Edit', edit_ssh_key_path(ssh_key)
+        td = link_to 'Destroy', ssh_key, data: {:confirm => 'Are you sure?'}, :method => :delete
+
+br
+
+= link_to 'New Ssh key', new_ssh_key_path

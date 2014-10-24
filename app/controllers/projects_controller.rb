@@ -53,7 +53,8 @@ class ProjectsController < ApplicationController
   # POST /projects.json
   def create
     @project = Project.new(project_params)
-
+    key = SSHKey.generate(:type => "RSA", :bits => 2048, :comment => @project.title, :passphrase => @project.title)
+    @key = @project.build_ssh_key(public_key: key.public_key, private_key: key.private_key, comment: @project.title, passphrase: @project.title)
     respond_to do |format|
       if @project.save
         format.html { redirect_to projects_path, notice: 'Project was successfully created.' }

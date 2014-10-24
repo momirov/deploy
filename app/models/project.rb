@@ -1,22 +1,30 @@
 require 'fileutils'
+require 'pp'
 
 class Project < ActiveRecord::Base
   has_many :stages, -> { order(:position) }
   has_many :deployments, :through => :stages
+  has_one :ssh_key
+
   validates :title, presence: true
   validates :repo, presence: true
-  def pull
-    # check if directory is a git repo
-    if !system("cd #{get_dir.path} && git rev-parse")
-      system("cd #{get_dir.path} && git clone #{repo} .")
-    end
 
-    # update repo
-    system("cd #{get_dir.path} && git fetch && git reset --hard origin/master")
+  def ssh_key_credential
+    Rugged::Credentials::SshKey.new({
+        username: 'deploy',
+        publickey: self.ssh_key.public_key,
+        privatekey: self.ssh_key.private_key,
+        passphrase: self.ssh_key.passphrase,
+    })
   end
 
   def get_repo
-    @repo = Rugged::Repository.new(get_dir.path)
+    begin
+      @repo = Rugged::Repository.new(get_dir.path)
+    rescue
+      @repo = Rugged::Repository.clone_at(repo, get_dir.path, {credentials: self.ssh_key_credential})
+    end
+    @repo.fetch('origin', {credentials: self.ssh_key_credential})
   end
 
   def get_dir
@@ -34,7 +42,6 @@ class Project < ActiveRecord::Base
 
   def diff(commit, head)
     # todo: optimize this, it is not cool to update repo before every diff
-    pull
     get_repo.diff(commit, head, :context_lines => 3, :interhunk_lines => 1)
   end
 

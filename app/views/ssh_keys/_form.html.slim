@@ -1,0 +1,21 @@
+= form_for @ssh_key do |f|
+  - if @ssh_key.errors.any?
+    #error_explanation
+      h2 = "#{pluralize(@ssh_key.errors.count, "error")} prohibited this ssh_key from being saved:"
+      ul
+        - @ssh_key.errors.full_messages.each do |message|
+          li = message
+
+  .field
+    = f.label :private_key
+    = f.text_field :private_key
+  .field
+    = f.label :public_key
+    = f.text_field :public_key
+  .field
+    = f.label :comment
+    = f.text_field :comment
+  .field
+    = f.label :passphrase
+    = f.text_field :passphrase
+  .actions = f.submit 'Save'
