@@ -7,10 +7,11 @@ class Project < ActiveRecord::Base
   validates :repo, presence: true
   def pull
     # check if directory is a git repo
-    if !system("cd #{get_dir.path} && git rev-parse")
+    begin
+      Rugged::Repository.new(get_dir.path)
+    rescue
       system("cd #{get_dir.path} && git clone #{repo} .")
     end
-
     # update repo
     system("cd #{get_dir.path} && git fetch && git reset --hard origin/master")
   end
