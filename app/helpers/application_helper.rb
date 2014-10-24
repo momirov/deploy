@@ -5,13 +5,13 @@ module ApplicationHelper
       cls = 'label label-success'
     end
     if status == 'error'
-      cls = 'label label-important'
+      cls = 'label label-danger'
     end
     if status == 'running'
       cls = 'label label-inverse'
     end
     if status == 'canceled'
-      cls = 'label'
+      cls = 'label label-warning'
     end
     content_tag :span, status, :class => cls
   end
