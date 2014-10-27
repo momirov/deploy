@@ -14,6 +14,7 @@ class Project < ActiveRecord::Base
     end
     # update repo
     system("cd #{get_dir.path} && git fetch && git reset --hard origin/master")
+    self.install_dependency
   end
 
   def get_repo
@@ -44,6 +45,12 @@ class Project < ActiveRecord::Base
     walker.push(head)
     walker.hide(commit)
     walker.each.to_a
+  end
+
+  def install_dependency
+    if File.exist?(self.get_dir_path.join('Gemfile.lock'))
+      RunCommand.new.async.run('bundle install --path vendor/bundle', self.get_dir_path)
+    end
   end
 
 end
