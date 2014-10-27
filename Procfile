@@ -1,2 +1,1 @@
-web: bundle exec puma -e production -p 5000 -S ~/puma -C config/puma.rb
-private_pub: rackup private_pub.ru -s thin -E production
+web: bundle exec puma -e $RAILS_ENV -p 5000 -S ~/puma -C config/puma.rb

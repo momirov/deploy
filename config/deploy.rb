@@ -34,8 +34,6 @@ set :linked_dirs, %w{bin log tmp/pids tmp/cache tmp/sockets vendor/bundle}
 # Default value for keep_releases is 5
 # set :keep_releases, 5
 
-
-
 set :rbenv_type, :system # or :system, depends on your rbenv setup
 set :rbenv_ruby, '2.0.0-p481'
 set :rbenv_prefix, "RBENV_ROOT=#{fetch(:rbenv_path)} RBENV_VERSION=#{fetch(:rbenv_ruby)} #{fetch(:rbenv_path)}/bin/rbenv exec"
@@ -53,13 +51,41 @@ task :check_write_permissions do
   end
 end
 
+namespace :foreman do
+  desc "Export the Procfile to Ubuntu's upstart scripts"
+  task :export, :roles => :app do
+    run "cd #{current_path} && #{sudo} foreman export upstart /etc/init -a #{application} -u #{user} -l /var/#{application}/log"
+  end
+
+  desc "Start the application services"
+  task :start, :roles => :app do
+    run "#{sudo} service #{application} start"
+  end
+
+  desc "Stop the application services"
+  task :stop, :roles => :app do
+    run "#{sudo} service #{application} stop"
+  end
+
+  desc "Restart the application services"
+  task :restart, :roles => :app do
+    run "#{sudo} service #{application} start || #{sudo} service #{application} restart"
+  end
+end
+
 namespace :'deploy' do
 
   desc 'Restart application'
   task :restart do
     on roles(:app), in: :sequence, wait: 5 do
-      # Your restart mechanism here, for example:
-      # execute :touch, release_path.join('tmp/restart.txt')
+      task :restart, :roles => :app do
+        #foreman.export
+
+        # on OS X the equivalent pid-finding command is `ps | grep '/puma' | head -n 1 | awk {'print $1'}`
+        run "(kill -s SIGUSR1 $(ps -C ruby -F | grep '/puma' | awk {'print $2'})) || #{sudo} service #{application} restart"
+
+        # foreman.restart # uncomment this (and comment line above) if we need to read changes to the procfile
+      end
     end
   end
 
