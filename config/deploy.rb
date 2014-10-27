@@ -53,23 +53,31 @@ end
 
 namespace :foreman do
   desc "Export the Procfile to Ubuntu's upstart scripts"
-  task :export, :roles => :app do
-    run "cd #{current_path} && #{sudo} foreman export upstart /etc/init -a #{application} -u #{user} -l /var/#{application}/log"
+  task :export do
+    on roles(:app) do |host|
+      run "cd #{current_path} && #{sudo} foreman export upstart /etc/init -a #{application} -u #{user} -l /var/#{application}/log"
+    end
   end
 
   desc "Start the application services"
-  task :start, :roles => :app do
-    run "#{sudo} service #{application} start"
+  task :start do
+    on roles(:app) do |host|
+      run "#{sudo} service #{application} start"
+    end
   end
 
   desc "Stop the application services"
-  task :stop, :roles => :app do
-    run "#{sudo} service #{application} stop"
+  task :stop do
+    on roles(:app) do |host|
+      run "#{sudo} service #{application} stop"
+    end
   end
 
   desc "Restart the application services"
-  task :restart, :roles => :app do
-    run "#{sudo} service #{application} start || #{sudo} service #{application} restart"
+  task :restart do
+    on roles(:app) do |host|
+      run "#{sudo} service #{application} start || #{sudo} service #{application} restart"
+    end
   end
 end
 
@@ -78,14 +86,12 @@ namespace :'deploy' do
   desc 'Restart application'
   task :restart do
     on roles(:app), in: :sequence, wait: 5 do
-      task :restart, :roles => :app do
-        #foreman.export
+      #foreman.export
 
-        # on OS X the equivalent pid-finding command is `ps | grep '/puma' | head -n 1 | awk {'print $1'}`
-        run "(kill -s SIGUSR1 $(ps -C ruby -F | grep '/puma' | awk {'print $2'})) || #{sudo} service #{application} restart"
+      # on OS X the equivalent pid-finding command is `ps | grep '/puma' | head -n 1 | awk {'print $1'}`
+      execute "kill -s SIGUSR1 $(ps -C ruby -F | grep '/puma' | awk {'print $2'})"
 
-        # foreman.restart # uncomment this (and comment line above) if we need to read changes to the procfile
-      end
+      # foreman.restart # uncomment this (and comment line above) if we need to read changes to the procfile
     end
   end
 
