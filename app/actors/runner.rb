@@ -5,7 +5,6 @@ class Runner
   INACTIVITY_TIMEOUT = 300 # wait 5 minutes for inactivity
 
   def deploy(deployment, cmd)
-    deployment.project.pull
     begin
       deploy_command = cmd.gsub("{user_name}", deployment.user)
       Bundler.with_clean_env do
