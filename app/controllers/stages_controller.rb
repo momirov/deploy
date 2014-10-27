@@ -56,9 +56,9 @@ class StagesController < ApplicationController
       @deployment.log = ''
       @deployment.save
 
-      @runner = Runner.new @deployment
+      @runner = Runner.new
       Celluloid::Actor["deployment_#{@deployment.id}"] = @runner
-      @runner.async.deploy @stage.deploy_cmd
+      @runner.async.deploy @deployment, @stage.deploy_cmd
       notice = 'New deployment started'
 
     end
@@ -85,9 +85,9 @@ class StagesController < ApplicationController
       @deployment.log = ''
       @deployment.save
 
-      @runner = Runner.new @deployment
+      @runner = Runner.new
       Celluloid::Actor["deployment_#{@deployment.id}"] = @runner
-      @runner.async.deploy @stage.rollback_cmd
+      @runner.async.deploy @deployment, @stage.rollback_cmd
       notice = 'New deployment started'
 
     end

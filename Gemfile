@@ -33,8 +33,7 @@ end
 
 gem 'simple-navigation'
 gem 'simple-navigation-bootstrap'
-gem 'celluloid'
-gem 'private_pub'
+gem 'sucker_punch', '~> 1.0'
 gem 'acts_as_list'
 gem 'pg'
 gem 'thin'
@@ -42,7 +41,6 @@ gem 'puma'
 gem 'kaminari'
 gem 'bootstrap-kaminari-views'
 gem 'dotiw'
-gem 'unicorn'
 gem 'rugged'
 
 gem 'high_voltage' # static pages

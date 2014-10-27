@@ -1,28 +1,23 @@
 require 'pty'
 
 class Runner
-  include Celluloid
+  include SuckerPunch::Job
   INACTIVITY_TIMEOUT = 300 # wait 5 minutes for inactivity
 
-  def initialize(deployment)
-    @deployment = deployment
-    @timer = after(INACTIVITY_TIMEOUT) { terminate }
-  end
-
-  def deploy(cmd)
-    @deployment.project.pull
+  def deploy(deployment, cmd)
+    deployment.project.pull
     begin
-      deploy_command = cmd.gsub("{user_name}", @deployment.user)
+      deploy_command = cmd.gsub("{user_name}", deployment.user)
       Bundler.with_clean_env do
-        PTY.spawn( "cd #{@deployment.project.get_dir_path} && #{deploy_command}" ) do |stdout, stdin, pid|
+        PTY.spawn( "cd #{deployment.project.get_dir_path} && #{deploy_command}" ) do |stdout, stdin, pid|
           begin
             stdout.each do |line|
-              @deployment.log += line
-              Pusher["deployment_#{@deployment.id}"].trigger('update_log', {
+              deployment.log += line
+              Pusher["deployment_#{deployment.id}"].trigger('update_log', {
                   new_line: line,
-                  status: @deployment.status
+                  status: deployment.status
               })
-              @deployment.save
+              deployment.save
             end
           rescue Errno::EIO
           end
@@ -31,23 +26,23 @@ class Runner
       end
     rescue PTY::ChildExited => e
     end
-  
+
     if $?.exitstatus.to_i > 0
-      @deployment.status = :error
+      deployment.status = :error
     else
-      @deployment.status = :completed
+      deployment.status = :completed
     end
 
-    @deployment.completed_at = Time.now
-    @deployment.save
+    deployment.completed_at = Time.now
+    deployment.save
 
     Pusher["deployment"].trigger('finished', {
-        id: @deployment.id,
-        status: @deployment.status
+        id: deployment.id,
+        status: deployment.status
     })
 
     # delete version cache
-    Rails.cache.delete("stage_revision_#{@deployment.stage.id}")
+    Rails.cache.delete("stage_revision_#{deployment.stage.id}")
     terminate
   end
 end
