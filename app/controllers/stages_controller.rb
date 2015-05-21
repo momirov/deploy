@@ -163,6 +163,6 @@ class StagesController < ApplicationController
 
   private
     def stage_params
-      params.require(:stage).permit(:title, :deploy_cmd, :rollback_cmd, :position, :current_version_cmd, :next_version_cmd)
+      params.require(:stage).permit(:title, :deploy_cmd, :rollback_cmd, :position, :current_version_cmd, :branch)
     end
 end
