@@ -17,7 +17,8 @@ class Stage < ActiveRecord::Base
 
   def get_next_version
     repo = self.project.get_repo
-    pp repo
+    repo.checkout_tree(repo.rev_parse(self.branch), :strategy => :force)
+    repo.rev_parse_oid(self.branch)
   end
 
   def get_next_version_short
