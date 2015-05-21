@@ -2,14 +2,14 @@
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
 class Youtube
-  perPage: 50
-  page: 1
+  perPage: 10
   videos: null
   watched_videos: Array()
+  nextPageToken: null
 
   embed: (element) ->
-    $(element).html "<iframe width='640' height='390' src='http://www.youtube.com/embed/#{@videos[0].id}?autoplay=1' frameborder='0' />"
-    @add_watched_video(@videos[0].id)
+    $(element).html "<iframe width='640' height='390' src='http://www.youtube.com/embed/#{@videos[0].id.videoId}?autoplay=1' frameborder='0' />"
+    @add_watched_video(@videos[0].id.videoId)
 
   constructor: ->
     # load watched videos from local storage
@@ -21,7 +21,7 @@ class Youtube
 
   filter_watched_videos: ->
     @videos = @videos.filter (video) =>
-      @watched_videos.lastIndexOf(video.id) == -1
+      @watched_videos.lastIndexOf(video.id.videoId) == -1
 
     if @videos.length == 0
       @page++
@@ -31,14 +31,12 @@ class Youtube
 
 
   handleData: (data) ->
-    @videos = data.data.items
+    console.log data
+    @videos = data.items
     @filter_watched_videos()
 
-  get_offset: ->
-    (@page - 1) * @perPage + 1
-
   get_videos: ->
-    $.ajax "http://gdata.youtube.com/feeds/api/videos?alt=jsonc&q=fail&start-index=#{@get_offset()}&max-results=#{@perPage}&v=2",
+    $.ajax "https://www.googleapis.com/youtube/v3/search?q=fails&part=id&type=video&key=AIzaSyCH2Z8DZ4MqVIoQPO38LknGinhiRqLKLFY&maxResults=#{@perPage}&nextPageToken=#{@nextPageToken}",
       dataType: 'jsonp'
     .done (data) => @handleData(data)
     @
