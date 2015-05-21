@@ -1,3 +1,5 @@
+require 'pp'
+
 class Stage < ActiveRecord::Base
   belongs_to :project
   has_many :deployments
@@ -6,7 +8,7 @@ class Stage < ActiveRecord::Base
 
   validates :title, :presence => true
   validates :deploy_cmd, :presence => true
-  validates :next_version_cmd, :presence => true
+  validates :branch, :presence => true
   validates :current_version_cmd, :presence => true
 
   def get_current_version
@@ -14,7 +16,9 @@ class Stage < ActiveRecord::Base
   end
 
   def get_next_version
-    %x{#{next_version_cmd}}.strip!
+    repo = self.project.get_repo
+    repo.checkout_tree(repo.rev_parse(self.branch), :strategy => :force)
+    repo.rev_parse_oid(self.branch)
   end
 
   def get_next_version_short

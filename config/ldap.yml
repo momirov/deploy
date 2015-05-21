@@ -21,7 +21,7 @@ authorizations: &AUTHORIZATIONS
 ## Enviornments
 
 development:
-  host: ldap
+  host: 192.168.0.95
   port: 389
   attribute: uid
   base: ou=People,ou=saturized,dc=ldap

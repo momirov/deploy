@@ -6,7 +6,7 @@ table.table.table-bordered
     th Deploy command
     th Rollback command
     th Current version command
-    th Next version command
+    th Deploy from branch
     th
 
   - @project.stages.each do |stage|
@@ -15,7 +15,7 @@ table.table.table-bordered
       td = stage.deploy_cmd
       td = stage.rollback_cmd
       td = stage.current_version_cmd
-      td = stage.next_version_cmd
+      td = stage.branch
       td
         =' link_to 'Edit', edit_project_stage_path(stage.project, stage), class: 'btn btn-primary'
         = link_to 'Destroy', [stage.project, stage], :confirm => 'Are you sure?', :method => :delete, :class => 'btn btn-danger'

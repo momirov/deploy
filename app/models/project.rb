@@ -51,6 +51,9 @@ class Project < ActiveRecord::Base
     if File.exist?(self.get_dir_path.join('Gemfile.lock'))
       RunCommand.new.async.run('bundle install --path vendor/bundle', self.get_dir_path)
     end
+    if File.exist?(self.get_dir_path.join('package.json'))
+      RunCommand.new.async.run('npm install --silent', self.get_dir_path)
+    end
   end
 
 end

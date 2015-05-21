@@ -1,11 +1,11 @@
 source 'https://rubygems.org'
 
-gem 'rails', '~>4.1.0'
+gem 'rails', '~> 4.2.0'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
-gem 'sass-rails', '~> 4.0.0'
+gem 'sass-rails', '~> 5.0.0'
 gem 'coffee-rails'
 gem 'uglifier'
 gem 'bootstrap-sass'
@@ -29,6 +29,7 @@ group :development do
   gem 'capistrano-rbenv', '~> 2.0', require: false
   gem 'capistrano-bundler', '~> 1.1', require: false
   gem 'sqlite3'
+  gem 'web-console', '~> 2.0'
 end
 
 gem 'simple-navigation'
@@ -44,7 +45,7 @@ gem 'dotiw'
 gem 'rugged'
 
 gem 'high_voltage' # static pages
-gem 'gravatarify', '~> 3.0.0'
+gem 'gravatarify', '~> 3.1.1'
 gem 'foreman'
 gem 'pusher'
 gem 'bootstrap_form'
