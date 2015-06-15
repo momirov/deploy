@@ -34,8 +34,8 @@ set :linked_dirs, %w{bin log tmp/pids tmp/cache tmp/sockets vendor/bundle}
 # Default value for keep_releases is 5
 # set :keep_releases, 5
 
-set :rbenv_type, :system # or :system, depends on your rbenv setup
-set :rbenv_ruby, '2.0.0-p481'
+set :rbenv_type, :user # or :system, depends on your rbenv setup
+set :rbenv_ruby, '2.0.0-p645'
 set :rbenv_prefix, "RBENV_ROOT=#{fetch(:rbenv_path)} RBENV_VERSION=#{fetch(:rbenv_ruby)} #{fetch(:rbenv_path)}/bin/rbenv exec"
 set :rbenv_map_bins, %w{rake gem bundle ruby rails}
 set :rbenv_roles, :all # default value
@@ -69,7 +69,7 @@ namespace :foreman do
   desc "Stop the application services"
   task :stop do
     on roles(:app) do |host|
-      run "#{sudo} service #{application} stop"
+      run "#{sudo} in #{application} stop"
     end
   end
 
