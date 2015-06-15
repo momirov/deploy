@@ -14,10 +14,10 @@ class Project < ActiveRecord::Base
     end
     # update repo
     system("cd #{get_dir.path} && git fetch && git reset --hard origin/master")
-    self.install_dependency
   end
 
   def get_repo
+    pull
     @repo = Rugged::Repository.new(get_dir.path)
   end
 
@@ -46,14 +46,4 @@ class Project < ActiveRecord::Base
     walker.hide(commit)
     walker.each.to_a
   end
-
-  def install_dependency
-    if File.exist?(self.get_dir_path.join('Gemfile.lock'))
-      RunCommand.new.async.run('bundle install --path vendor/bundle', self.get_dir_path)
-    end
-    if File.exist?(self.get_dir_path.join('package.json'))
-      RunCommand.new.async.run('npm install --silent', self.get_dir_path)
-    end
-  end
-
 end

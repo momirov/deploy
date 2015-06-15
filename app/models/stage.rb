@@ -36,4 +36,18 @@ class Stage < ActiveRecord::Base
   def exitstatus
     @exitstatus
   end
+
+  def get_deploy_command
+    ["cd #{project.get_dir_path}", install_dependency, deploy_cmd].flatten.compact.join(' && ')
+  end
+
+  def install_dependency
+    commands = []
+    if File.exist?(self.project.get_dir_path.join('Gemfile.lock'))
+      commands << 'bundle install'
+    end
+    if File.exist?(self.project.get_dir_path.join('package.json'))
+      commands << 'npm install --silent'
+    end
+  end
 end

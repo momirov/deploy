@@ -58,7 +58,7 @@ class StagesController < ApplicationController
 
       @runner = Runner.new
       Celluloid::Actor["deployment_#{@deployment.id}"] = @runner
-      @runner.async.deploy @deployment, @stage.deploy_cmd
+      @runner.async.deploy @deployment, @stage.get_deploy_command
       notice = 'New deployment started'
 
     end

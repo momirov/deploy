@@ -16,13 +16,13 @@ ActiveRecord::Schema.define(version: 20150519164142) do
   create_table "deployments", force: :cascade do |t|
     t.integer  "stage_id"
     t.integer  "project_id"
-    t.string   "user"
+    t.string   "user",         limit: 255
     t.text     "log"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "status"
-    t.string   "old_revision"
-    t.string   "new_revision"
+    t.string   "status",       limit: 255
+    t.string   "old_revision", limit: 255
+    t.string   "new_revision", limit: 255
     t.datetime "completed_at"
   end
 
@@ -30,17 +30,17 @@ ActiveRecord::Schema.define(version: 20150519164142) do
   add_index "deployments", ["stage_id"], name: "index_deployments_on_stage_id"
 
   create_table "projects", force: :cascade do |t|
-    t.string   "title"
+    t.string   "title",      limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "repo"
+    t.string   "repo",       limit: 255
   end
 
   create_table "ssh_keys", force: :cascade do |t|
     t.text     "private_key"
     t.text     "public_key"
-    t.string   "comment"
-    t.string   "passphrase"
+    t.string   "comment",     limit: 255
+    t.string   "passphrase",  limit: 255
     t.integer  "project_id"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -48,30 +48,30 @@ ActiveRecord::Schema.define(version: 20150519164142) do
 
   create_table "stages", force: :cascade do |t|
     t.integer  "project_id"
-    t.string   "title"
-    t.string   "deploy_cmd"
-    t.string   "current_version_cmd"
+    t.string   "title",               limit: 255
+    t.string   "deploy_cmd",          limit: 255
+    t.string   "current_version_cmd", limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "position"
-    t.string   "rollback_cmd"
+    t.string   "rollback_cmd",        limit: 255
     t.string   "branch"
   end
 
   add_index "stages", ["project_id"], name: "index_stages_on_project_id"
 
   create_table "users", force: :cascade do |t|
-    t.string   "email",               default: "", null: false
-    t.string   "encrypted_password",  default: "", null: false
+    t.string   "email",               limit: 255, default: "", null: false
+    t.string   "encrypted_password",  limit: 255, default: "", null: false
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",       default: 0
+    t.integer  "sign_in_count",                   default: 0
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
-    t.string   "current_sign_in_ip"
-    t.string   "last_sign_in_ip"
+    t.string   "current_sign_in_ip",  limit: 255
+    t.string   "last_sign_in_ip",     limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "login",               default: "", null: false
+    t.string   "login",               limit: 255, default: "", null: false
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true
