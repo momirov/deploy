@@ -43,8 +43,8 @@ class Stage < ActiveRecord::Base
 
   def install_dependency
     commands = []
-    if File.exist?(self.project.get_dir_path.join('Gemfile.lock'))
-      commands << 'bundle install'
+    if File.exist?(self.project.get_dir_path.join('Gemfile'))
+      commands << 'bundle install --binstubs'
     end
     if File.exist?(self.project.get_dir_path.join('package.json'))
       commands << 'npm install --silent'
