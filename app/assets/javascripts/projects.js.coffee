@@ -2,14 +2,14 @@
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
 
-parser = new ansi()
 colorTheLog = (data) ->
-  $('#deployment-log').prepend(parser.toHtml(data.split("\n").reverse().join("\n")));
+  ansi_up.ansi_to_html(data.split("\n").reverse().join("\n"), {use_classes: true})
 
 $ ->
   # color the log on deployment show
   if $('#deployment-log').length > 0
-    colorTheLog($('#deployment-log').html())
+    $('#deployment-log').html(colorTheLog($('#deployment-log').html()));
+
 
   # spinner for labels
   $(".label-inverse").parent().spin
@@ -46,7 +46,7 @@ $ ->
   if $("#deployment").data('id')
     deploymentChannel = pusher.subscribe('deployment_' + $("#deployment").data('id'));
     deploymentChannel.bind 'update_log', (data) ->
-      colorTheLog(data.new_line)
+      $('#deployment-log').prepend(colorTheLog(data.new_line))
       $('.status').html(data.status)
 
   statusChannel.bind 'finished', (data) ->
@@ -59,10 +59,3 @@ $ ->
       $("#deployment_#{data.id} .spinner").remove()
       $("#deployment_#{data.id} td span").removeClass('label-inverse').addClass('label-important').html('error')
       $("#deployment_#{data.id} td a.btn-danger").remove()
-
-
-
-
-
-
-
