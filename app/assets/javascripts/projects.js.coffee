@@ -39,7 +39,6 @@ $ ->
 
   pusher = new Pusher('ad3b3ac62e18e65df34b', {
     wsHost: window.location.hostname,
-    wsPort: 8080,
     enabledTransports: ["ws", "flash"],
     disabledTransports: ["flash"]
   })
