@@ -24,11 +24,9 @@ class Youtube
       @watched_videos.lastIndexOf(video.id.videoId) == -1
 
     if @videos.length == 0
-      @page++
       @get_videos()
     else
       @embed('.youtube')
-
 
   handleData: (data) ->
     console.log data
@@ -37,7 +35,10 @@ class Youtube
     @filter_watched_videos()
 
   get_videos: ->
-    $.ajax "https://www.googleapis.com/youtube/v3/search?q=fails&part=id&type=video&key=AIzaSyCH2Z8DZ4MqVIoQPO38LknGinhiRqLKLFY&maxResults=#{@perPage}&nextPageToken=#{@nextPageToken}",
+    url = "https://www.googleapis.com/youtube/v3/search?q=fails&part=id&type=video&key=AIzaSyCH2Z8DZ4MqVIoQPO38LknGinhiRqLKLFY&maxResults=#{@perPage}"
+    if @nextPageToken
+      url += "&pageToken=#{@nextPageToken}"
+    $.ajax url,
       dataType: 'jsonp'
     .done (data) => @handleData(data)
     @
