@@ -37,7 +37,12 @@ $ ->
   $('.environments span').each (index) ->
     $.getScript($(this).data('url'))
 
-  pusher = new Pusher('ad3b3ac62e18e65df34b')
+  pusher = new Pusher('ad3b3ac62e18e65df34b', {
+    wsHost: 'localhost',
+    wsPort: 8080,
+    enabledTransports: ["ws", "flash"],
+    disabledTransports: ["flash"]
+  })
   statusChannel = pusher.subscribe('deployment')
   if $("#deployment").data('id')
     deploymentChannel = pusher.subscribe('deployment_' + $("#deployment").data('id'));

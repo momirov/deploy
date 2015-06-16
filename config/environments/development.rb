@@ -33,6 +33,8 @@ Deploy::Application.configure do
   Pusher.app_id = 87380
   Pusher.key = 'ad3b3ac62e18e65df34b'
   Pusher.secret = 'c108dd2a9e203074bd77'
+  Pusher.host = 'localhost'
+  Pusher.port = 8080
   Slim::Engine.options[:pretty] = false
 end
 

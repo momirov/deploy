@@ -14,6 +14,7 @@ class DeploymentsController < ApplicationController
   # GET /deployments/1.json
   def show
     @deployment = Deployment.find(params[:id])
+    @log = Rails.cache.read("log_#{@deployment.id}")
 
     respond_to do |format|
       format.html # show.html.erb
