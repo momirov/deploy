@@ -1,1 +1,2 @@
-$("#deploy-version-<%= @stage.id %>").replaceWith('<span><a href="<%= diff_project_path(@stage.project, @stage.get_current_version, @stage.get_next_version) %>"><%= @stage.get_next_version_short %></a></span>');
+$("#deploy-version-<%= @stage.id %>")
+  .replaceWith('<span><a href="<%= diff_project_path(@stage.project, @stage.get_current_version, @stage.get_next_version) %>"><%= @stage.get_next_version_short %></a></span>');

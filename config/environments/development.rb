@@ -36,6 +36,8 @@ Deploy::Application.configure do
   Pusher.host = 'localhost'
   Pusher.port = 8080
   Slim::Engine.options[:pretty] = false
+
+  config.cache_store = :memory_store
 end
 
 
