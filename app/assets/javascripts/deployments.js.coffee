@@ -33,6 +33,7 @@ class Youtube
   handleData: (data) ->
     console.log data
     @videos = data.items
+    @nextPageToken = data.nextPageToken
     @filter_watched_videos()
 
   get_videos: ->
