@@ -16,7 +16,7 @@ class Runner
                   new_line: line,
                   status: deployment.status
               })
-              deployment.save
+              Rails.cache.write("log_#{deployment.id}", deployment.log)
             end
           rescue Errno::EIO
           end
@@ -34,7 +34,7 @@ class Runner
 
     deployment.completed_at = Time.now
     deployment.save
-
+    Rails.cache.delete("log_#{deployment_id}")
     Pusher["deployment"].trigger('finished', {
         id: deployment.id,
         status: deployment.status
