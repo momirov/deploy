@@ -46,6 +46,7 @@ class StagesController < ApplicationController
     notice = "Deployment for #{@stage.title} is already running, please wait for the previous deployment to finish."
 
     if @stage.deployments.where(:status => :running).count == 0
+      @stage.project.pull
       @deployment = Deployment.new
       @deployment.stage = @stage
       @deployment.user = current_user.login

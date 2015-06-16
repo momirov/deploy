@@ -17,7 +17,6 @@ class Project < ActiveRecord::Base
   end
 
   def get_repo
-    pull
     @repo = Rugged::Repository.new(get_dir.path)
   end
 
