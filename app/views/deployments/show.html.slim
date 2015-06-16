@@ -23,7 +23,7 @@ div.row-fluid
       = distance_of_time_in_words(@deployment.created_at, @deployment.completed_at, true) if @deployment.completed_at?
     p
       strong Log:
-      pre#deployment-log.tomorrow-night-eighties-ansi-theme
+      pre#deployment-log.ansi-base16-railscasts-bright
         - unless @log.to_s == ''
           = @log.html_safe
         - else
