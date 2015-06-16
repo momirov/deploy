@@ -38,7 +38,7 @@ $ ->
     $.getScript($(this).data('url'))
 
   pusher = new Pusher('ad3b3ac62e18e65df34b', {
-    wsHost: 'localhost',
+    wsHost: window.location.hostname,
     wsPort: 8080,
     enabledTransports: ["ws", "flash"],
     disabledTransports: ["flash"]
