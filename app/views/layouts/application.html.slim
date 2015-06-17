@@ -1,7 +1,7 @@
 doctype html
 html
   head
-    title Depturized
+    title Deployrized
     = javascript_include_tag "//js.pusher.com/2.2/pusher.min.js"
     = javascript_include_tag "application"
     = stylesheet_link_tag    "application", :media => "all"
@@ -16,7 +16,7 @@ html
             span.icon-bar
             span.icon-bar
             span.icon-bar
-          = link_to 'Depturized', root_path, :class => 'navbar-brand'
+          = link_to 'Deployrized', root_path, :class => 'navbar-brand'
         .collapse.navbar-collapse
           = render_navigation :expand_all => true, :renderer => :bootstrap
           - if user_signed_in?
