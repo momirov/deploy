@@ -49,7 +49,7 @@ class Stage < ActiveRecord::Base
     if File.exist?(self.project.get_dir_path.join('Gemfile'))
       commands << 'bundle install --binstubs'
     end
-    if File.exist?(self.project.get_dir_path.join('package.json'))
+    if npm_support && File.exist?(self.project.get_dir_path.join('package.json'))
       commands << 'npm install --silent'
     end
   end
