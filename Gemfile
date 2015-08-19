@@ -34,7 +34,7 @@ end
 
 gem 'simple-navigation'
 gem 'simple-navigation-bootstrap'
-gem 'sucker_punch', '~> 1.0'
+gem 'celluloid'
 gem 'acts_as_list'
 gem 'pg'
 gem 'thin'

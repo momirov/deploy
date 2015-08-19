@@ -47,6 +47,8 @@ $ ->
     deploymentChannel = pusher.subscribe('deployment_' + $("#deployment").data('id'));
     deploymentChannel.bind 'update_log', (data) ->
       $('#deployment-log').prepend(colorTheLog(data.new_line))
+
+    statusChannel.bind 'finished', (data) ->
       $('.status').html(data.status)
 
   statusChannel.bind 'finished', (data) ->
