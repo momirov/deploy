@@ -1,5 +1,6 @@
 require 'open3'
 require 'pp'
+
 class Runner
   include Celluloid
   include Celluloid::Internals::Logger
@@ -57,7 +58,6 @@ class Runner
           exit_code = wait_thr.value.exitstatus
         end
       end
-    rescue PTY::ChildExited => e
     end
     if exit_code > 0
       @deployment.status = :error
