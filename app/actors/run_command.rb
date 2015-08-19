@@ -1,7 +1,7 @@
 require 'pty'
 
 class RunCommand
-  include SuckerPunch::Job
+  include Celluloid
   INACTIVITY_TIMEOUT = 300 # wait 5 minutes for inactivity
 
   def run(cmd, cwd)
