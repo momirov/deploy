@@ -72,13 +72,9 @@ class Runner
       pp e
     end
 
-    deployment.completed_at = Time.now
-    deployment.save
-    Rails.cache.delete("log_#{deployment_id}")
     Pusher["deployment"].trigger('finished', {
         id: @deployment.id,
-        status: @deployment.status,
-        time: @depl
+        status: @deployment.status
     })
 
     # delete version cache
