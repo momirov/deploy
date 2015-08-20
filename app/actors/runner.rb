@@ -29,7 +29,7 @@ class Runner
           ret << chr
           if chr == "\n" || chr == "\r"
             begin
-              Pusher["deployment_#{@deployment.id}"].trigger('update_log', {
+              Pusher.trigger("deployment_#{@deployment.id}", 'update_log', {
                 new_line: output,
                 status: @deployment.status
               })
@@ -41,7 +41,7 @@ class Runner
           end
         end
         error_message = nil
-        Pusher["deployment_#{@deployment.id}"].trigger('update_log', {
+        Pusher.trigger("deployment_#{@deployment.id}", 'update_log', {
              new_line: output,
              status: @deployment.status
          })  unless output.empty?
@@ -72,7 +72,7 @@ class Runner
       pp e
     end
 
-    Pusher["deployment"].trigger('finished', {
+    Pusher.trigger("deployment", 'finished', {
         id: @deployment.id,
         status: @deployment.status
     })
